@@ -40,16 +40,20 @@ def callback(
 @app.command('translate')
 def translate(
     source: str = typer.Argument(af.STDIN),
+    table: str = typer.Argument(''),
     target: str = typer.Argument(af.STDOUT),
     inp: str = typer.Option('', '-i', '--input'),
     out: str = typer.Option('', '-o', '--output'),
+    tab: str = typer.Option('', '-t', '--table'),
 ) -> int:
     """
     Translate from a language to a 'langauge'.
     """
+    command = 'translate'
     incoming = inp if inp else (source if source != af.STDIN else '')
+    translation_table_path = tab if tab else (table if table != '' else '')
     outgoing = out if out else (target if target != af.STDOUT else '')
-    action = ['translate', incoming, outgoing]
+    action = [command, incoming, translation_table_path, outgoing]
     return af.main(action)
 
 

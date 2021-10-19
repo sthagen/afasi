@@ -17,14 +17,13 @@ def test_app_version():
     assert afasi.__version__ in result.stdout
 
 
-def test_app_template():
+def test_app_translate():
     result = runner.invoke(app, ['translate'])
-    assert result.exit_code == 0
-    assert not result.stdout
+    assert result.exit_code == 1
 
 
 def test_cli_main():
-    message = 'no input found'
-    with pytest.raises(UserWarning) as ex:
+    message = 'received wrong number of arguments'
+    with pytest.raises(UserWarning, match=message) as ex:
         cli.main(['translate', 'no_file_there']) == 1
         assert message in str(ex.value)
