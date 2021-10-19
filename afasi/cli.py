@@ -2,14 +2,13 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=line-too-long
 """Commandline API gateway for afasi."""
-import pathlib
 import sys
 from typing import List, Union
 
 import typer
 
 import afasi
-import afasi.kysy as af
+import afasi.afasi as af
 
 APP_NAME = 'Fuzz a language by mixing up only few words.'
 APP_ALIAS = 'afasi'
@@ -67,4 +66,4 @@ def app_version() -> None:
 def main(argv: Union[List[str], None] = None) -> int:
     """Delegate processing to functional module."""
     argv = sys.argv[1:] if argv is None else argv
-    return ky.main(argv)
+    return af.main(argv)

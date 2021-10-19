@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=missing-docstring,unused-import,reimported
-import pathlib
-
 import pytest
 
-import afasi.kysy as af
+import afasi.afasi as af
 
 
 def test_main_empty():

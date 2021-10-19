@@ -3,6 +3,7 @@
 """Fuzz a language by mixing up only few words. API."""
 import os
 import pathlib
+import sys
 import warnings
 from typing import List, Union
 
@@ -14,8 +15,8 @@ ENCODING_ERRORS_POLICY = 'ignore'
 
 STDIN, STDOUT = 'STDIN', 'STDOUT'
 DISPATCH = {
-  STDIN: sys.stdin,
-  STDOUT: sys.stdout,
+    STDIN: sys.stdin,
+    STDOUT: sys.stdout,
 }
 
 
@@ -30,7 +31,7 @@ def main(argv: Union[List[str], None] = None) -> int:
         warnings.warn('received unknown command')
         return 2
 
-    command, inp, out = argv[0]
+    command, inp, out = argv
     if inp:
         if not pathlib.Path(str(inp)).is_file():
             warnings.warn('source is no file')
