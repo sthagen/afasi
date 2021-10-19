@@ -1,0 +1,7 @@
+[
+  [">Rock", ">Lounge"],
+  [">Track", ">Rock"],
+  [">Autotrack", ">Autorock"],
+  ["rock r", "lounge r"],
+  ["track r", "rock r"]
+]
