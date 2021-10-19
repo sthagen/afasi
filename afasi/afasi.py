@@ -12,11 +12,17 @@ DEBUG = os.getenv(DEBUG_VAR)
 ENCODING = 'utf-8'
 ENCODING_ERRORS_POLICY = 'ignore'
 
+STDIN, STDOUT = 'STDIN', 'STDOUT'
+DISPATCH = {
+  STDIN: sys.stdin,
+  STDOUT: sys.stdout,
+}
+
 
 def main(argv: Union[List[str], None] = None) -> int:
     """Drive the translation."""
-    # ['translate', source]
-    if not argv or len(argv) < 1:
+    # ['translate', inp, out]
+    if not argv or len(argv) != 3:
         warnings.warn('received wrong number of arguments')
         return 2
 
@@ -24,11 +30,15 @@ def main(argv: Union[List[str], None] = None) -> int:
         warnings.warn('received unknown command')
         return 2
 
-    command = argv[0]
-    if len(argv) > 1:
-        source = arv[1]
-        if not pathlib.Path(str(source)).is_file():
+    command, inp, out = argv[0]
+    if inp:
+        if not pathlib.Path(str(inp)).is_file():
             warnings.warn('source is no file')
+            return 1
+
+    if out:
+        if pathlib.Path(str(out)).is_file():
+            warnings.warn('target file exists')
             return 1
 
     return 0
