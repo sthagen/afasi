@@ -11,12 +11,6 @@ import typer
 import afasi
 import afasi.kysy as af
 
-STDIN, STDOUT = 'STDIN', 'STDOUT'
-DISPATCH = {
-  STDIN: sys.stdin,
-  STDOUT: sys.stdout,
-}
-
 APP_NAME = 'Fuzz a language by mixing up only few words.'
 APP_ALIAS = 'afasi'
 app = typer.Typer(
@@ -46,16 +40,16 @@ def callback(
 
 @app.command('translate')
 def translate(
-    source: str = typer.Argument(STDIN),
-    target: str = typer.Argument(STDOUT),
+    source: str = typer.Argument(af.STDIN),
+    target: str = typer.Argument(af.STDOUT),
     inp: str = typer.Option('', '-i', '--input'),
     out: str = typer.Option('', '-o', '--output'),
 ) -> int:
     """
     Translate from a language to a 'langauge'.
     """
-    incoming = inp if inp else (source if source != STDIN else '')
-    outgoing = out if out else (target if target != STDOUT else '')
+    incoming = inp if inp else (source if source != af.STDIN else '')
+    outgoing = out if out else (target if target != af.STDOUT else '')
     action = ['translate', incoming, outgoing]
     return af.main(action)
 
