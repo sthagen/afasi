@@ -17,6 +17,11 @@ format:
 	$(isort)
 	$(black)
 
+.PHONY: init
+init:
+	pip install -r tests/requirements.txt
+	pip install -r tests/requirements-dev.txt
+
 .PHONY: lint
 lint:
 	python setup.py check -ms
@@ -54,3 +59,4 @@ clean:
 	rm -rf build
 	rm -f afasi-report.*
 	python setup.py clean
+
