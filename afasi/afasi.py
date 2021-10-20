@@ -33,7 +33,7 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
     with open(path, 'r', encoding=ENCODING) as handle:
         try:
             table = json.load(handle)
-        except JSONDecodeError as err:
+        except JSONDecodeError:
             raise ValueError('translation table path must lead to a JSON file')
 
     if not table:
