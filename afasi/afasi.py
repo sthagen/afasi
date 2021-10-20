@@ -70,6 +70,13 @@ def report_request(trans: Tuple[Tuple[str, str], ...]) -> List[str]:
     return report + ['']
 
 
+def replace(trans: Tuple[Tuple[str, str], ...], text: str) -> str:
+    """Naive replacer."""
+    for repl, ace in trans:
+        text = text.replace(repl, ace)
+    return text
+
+
 def main(argv: Union[List[str], None] = None) -> int:
     """Drive the translation."""
     # ['translate', inp, out]
@@ -105,5 +112,8 @@ def main(argv: Union[List[str], None] = None) -> int:
 
     print('\n'.join(report_request(trans)))
     print(' ... later')
+    if not inp and not out:
+        for line in sys.stdin:
+            sys.stdout.write(replace(trans, line))
 
     return 0
