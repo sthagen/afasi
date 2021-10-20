@@ -31,6 +31,10 @@ def callback(
 ) -> None:
     """
     Fuzz a language by mixing up only few words.
+
+    The translation table entries are applied in order per line of input.
+    So, with large translation tables the performance with obviously degrade with a power of two.
+    Which should be seen as a hint to maintain both language files in separate entities not as a patch task.
     """
     if version:
         typer.echo(f'{APP_NAME} version {afasi.__version__}')
@@ -40,20 +44,35 @@ def callback(
 @app.command('translate')
 def translate(
     source: str = typer.Argument(af.STDIN),
-    table: str = typer.Argument(''),
     target: str = typer.Argument(af.STDOUT),
-    inp: str = typer.Option('', '-i', '--input'),
-    out: str = typer.Option('', '-o', '--output'),
-    tab: str = typer.Option('', '-t', '--table'),
+    inp: str = typer.Option('', '-i', '--input', help='Path to input file (default is reading from standard in)'),
+    out: str = typer.Option(
+        '', '-o', '--output', help='Path to non-existing output file (default is writing to standard out)'
+    ),
+    translation_table_path: str = typer.Option(
+        '',
+        '-t',
+        '--table',
+        help=(
+            'Path to translation table file in JSON format.'
+            '\nStructure of table data is [["repl", "ace"], ["als", "othis"]]'
+        ),
+    ),
+    dry: bool = typer.Option(
+        False,
+        '-n',
+        '--dryrun',
+        help='Flag to execute without writing the translation but a diff instead (default is False)',
+    ),
 ) -> int:
     """
     Translate from a language to a 'langauge'.
     """
     command = 'translate'
     incoming = inp if inp else (source if source != af.STDIN else '')
-    translation_table_path = tab if tab else (table if table != '' else '')
     outgoing = out if out else (target if target != af.STDOUT else '')
-    action = [command, incoming, translation_table_path, outgoing]
+    dryrun = 'DRYRUN' if dry else ''
+    action = [command, incoming, outgoing, translation_table_path, dryrun]
     return af.main(action)
 
 
