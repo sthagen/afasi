@@ -39,12 +39,12 @@ def callback(
     The translation table is an array or two element arrays provided as JSON and is expected have the shape:
 
     \b
-    [
-      ["repl", "ace"],
-      ["als", "othis"]
-    ]
+      [
+        ["repl", "ace"],
+        ["als", "othis"]
+      ]
 
-    Defaults for input source is standard in and out sent to standard out.
+    Default for input source is standard in and out per default is sent to standard out.
     """
     if version:
         typer.echo(f'{APP_NAME} version {afasi.__version__}')
