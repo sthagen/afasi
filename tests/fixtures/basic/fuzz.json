@@ -2,6 +2,7 @@
   [">Rock", ">Lounge"],
   [">Track", ">Rock"],
   [">Autotrack", ">Autorock"],
+  ["remove_me_in_filter", "remove_me_in_filter"],
   ["rock r", "lounge r"],
   ["rock r", "lounge r"],
   ["rock r", "lounge r"],
