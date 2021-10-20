@@ -131,4 +131,5 @@ dmypy.json
 # Local development artifacts
 *~
 .idea
+local_publi.sh
 tests/fixtures/basic/minimal-out.xml
