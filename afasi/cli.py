@@ -78,6 +78,7 @@ def translate(
             '\nStructure of table data is [["repl", "ace"], ["als", "othis"]]'
         ),
         metavar='<translation table path>',
+        ...,
     ),
     dry: bool = typer.Option(
         False,
