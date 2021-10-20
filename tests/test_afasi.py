@@ -24,4 +24,6 @@ def test_main_translate():
 
 
 def test_load_translation_table_empty():
-    af.load_translation_table('') == (('', ''),)
+    message = 'translation table path not given'
+    with pytest.raises(ValueError, match=message):
+        af.load_translation_table('')
