@@ -69,7 +69,7 @@ def translate(
         help='Path to non-existing output file (default is writing to standard out)',
         metavar='<targetpath>',
     ),
-    translation_table_path: ... = typer.Option(
+    translation_table_path: str = typer.Option(
         '-t',
         '--table',
         help=(
