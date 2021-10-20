@@ -70,10 +70,8 @@ def translate(
         metavar='<targetpath>',
     ),
     translation_table_path: ... = typer.Option(
-        '',
         '-t',
         '--table',
-        ...,
         help=(
             'Path to translation table file in JSON format.'
             '\nStructure of table data is [["repl", "ace"], ["als", "othis"]]'
