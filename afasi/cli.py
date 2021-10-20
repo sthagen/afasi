@@ -33,8 +33,14 @@ def callback(
     Fuzz a language by mixing up only few words.
 
     The translation table entries are applied in order per line of input.
-    So, with large translation tables the performance with obviously degrade with a power of two.
+    So, with large translation tables the performance will obviously degrade with a power of two.
     Which should be seen as a hint to maintain both language files in separate entities not as a patch task.
+    
+    The translation table is an array or two element arrays provided as JSON and is expected have the shape: 
+    \n[
+    \n  ["repl", "ace"],
+    \n  ["als", "othis"]
+    \n]
     """
     if version:
         typer.echo(f'{APP_NAME} version {afasi.__version__}')
