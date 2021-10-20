@@ -37,13 +37,13 @@ def callback(
     Which should be seen as a hint to maintain both language files in separate entities not as a patch task.
 
     The translation table is an array or two element arrays provided as JSON and is expected have the shape:
-    
+
     \b
     [
       ["repl", "ace"],
       ["als", "othis"]
     ]
-    
+
     Defaults for input source is standard in and out sent to standard out.
     """
     if version:
