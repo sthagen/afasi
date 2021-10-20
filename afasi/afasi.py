@@ -24,7 +24,7 @@ DISPATCH = {
 
 def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
     """Load the translation table into a tuple of pairs.
-    
+
     Filter same -> same and redundant repl -> ace from source.
     """
     if not path:
