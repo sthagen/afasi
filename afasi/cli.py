@@ -70,6 +70,7 @@ def translate(
         metavar='<targetpath>',
     ),
     translation_table_path: str = typer.Option(
+        '',
         '-t',
         '--table',
         help=(
