@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=expression-not-assigned,line-too-long
 """Fuzz a language by mixing up only few words. API."""
+import difflib
 import json
 import os
 import pathlib
@@ -59,7 +60,7 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
 
 def report_request(trans: Tuple[Tuple[str, str], ...]) -> List[str]:
     """Generate report of request per list of lines."""
-    report = ['using these translations (in order):']
+    report = ['* translations (in order):']
     repl_col_width = max(len(repl) for repl, _ in trans) + 1
     for rank, (repl, ace) in enumerate(trans, start=1):
         lim_repl = "'" if "'" not in repl else ''
@@ -120,19 +121,28 @@ def main(argv: Union[List[str], None] = None) -> int:
         print(err, file=sys.stderr)
         return 1
 
-    print('\n'.join(report_request(trans)), file=sys.stderr)
-
-    if dryrun:
-        print('dryrun requested', file=sys.stderr)
-        return 0
-
     source = sys.stdin if not inp else reader(inp)
-    if out:
-        with open(pathlib.Path(out), 'wt', encoding=ENCODING) as target:
-            for line in source:
-                target.write(replace(trans, line))
-    else:
+    if dryrun:
+        print('dryrun requested\n# ---', file=sys.stderr)
+        print('* resources used:', file=sys.stderr)
+        print(f'  - input from:       "{"STDIN" if not inp else inp}"', file=sys.stderr)
+        print(f'  - output to:        "{"STDOUT" if not out else out}"', file=sys.stderr)
+        print(f'  - translation from: "{translation_table_path}"', file=sys.stderr)
+        print('\n'.join(report_request(trans)), end='', file=sys.stderr)
+        src, tgt = [], []
         for line in source:
-            sys.stdout.write(replace(trans, line))
+            src.append(line)
+            tgt.append(replace(trans, line))
+        print('* diff of source to target:')
+        print(''.join(line for line in difflib.unified_diff(src, tgt, fromfile='SOURCE', tofile='TARGET')).strip())
+        print('# ---')
+    else:
+        if out:
+            with open(pathlib.Path(out), 'wt', encoding=ENCODING) as target:
+                for line in source:
+                    target.write(replace(trans, line))
+        else:
+            for line in source:
+                sys.stdout.write(replace(trans, line))
 
     return 0

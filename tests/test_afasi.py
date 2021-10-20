@@ -66,7 +66,8 @@ def test_main_target_file_does_not_exist_no_table_path(capsys):
 
 
 def test_main_translate_dryrun_only():
-    af.main(['translate', '', '', 'tests/fixtures/basic/fuzz.json', 'DRYRUN']) == 0
+    inp = 'tests/fixtures/basic/language.xml'
+    af.main(['translate', inp, '', 'tests/fixtures/basic/fuzz.json', 'DRYRUN']) == 0
 
 
 def test_main_translate_for_real():
@@ -102,28 +103,18 @@ def test_load_translation_table_with_non_pairs():
 def test_main_translate_minimal_for_real_stdout(capsys):
     inp = 'tests/fixtures/basic/minimal-in.xml'
     tab = 'tests/fixtures/basic/minimal.json'
-    messages = (
-        "  1. '>Rock' -> '>Lounge'",
-        "  2. '>Track' -> '>Rock'",
-    )
     af.main(['translate', inp, '', tab, '']) == 0
     captured = capsys.readouterr()
-    for message in messages:
-        assert message in captured.err
+    assert captured.err == ''
 
 
 def test_main_translate_minimal_for_real_to_file(capsys):
     inp = 'tests/fixtures/basic/minimal-in.xml'
     out = 'tests/fixtures/basic/minimal-out.xml'
     tab = 'tests/fixtures/basic/minimal.json'
-    messages = (
-        "  1. '>Rock' -> '>Lounge'",
-        "  2. '>Track' -> '>Rock'",
-    )
     af.main(['translate', inp, out, tab, '']) == 0
     captured = capsys.readouterr()
-    for message in messages:
-        assert message in captured.err
+    assert captured.err == ''
     assert pathlib.Path(out).is_file()
 
     with open(out, 'rt', encoding=af.ENCODING) as handle:
@@ -135,3 +126,18 @@ def test_main_translate_minimal_for_real_to_file(capsys):
         tgt = handle.readlines()
 
     assert DIFF_FOR_MINIMAL == ''.join(line for line in difflib.unified_diff(src, tgt, fromfile=inp, tofile=out))
+
+
+def test_main_translate_minimal_dryrun_for_real_to_file(capsys):
+    inp = 'tests/fixtures/basic/minimal-in.xml'
+    out = 'tests/fixtures/basic/minimal-out-dryrun-will-not-be-created.xml'
+    tab = 'tests/fixtures/basic/minimal.json'
+    messages = (
+        "  1. '>Rock' -> '>Lounge'",
+        "  2. '>Track' -> '>Rock'",
+    )
+    af.main(['translate', inp, out, tab, 'DRYRUN']) == 0
+    captured = capsys.readouterr()
+    for message in messages:
+        assert message in captured.err
+    assert pathlib.Path(out).is_file() is False
