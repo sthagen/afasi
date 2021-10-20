@@ -26,6 +26,9 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
     if not path:
         raise ValueError('translation table path not given')
 
+    if not path.is_file():
+        raise ValueError('translation table path must lead to a file')
+
     with open(path, 'r', encoding=ENCODING) as handle:
         table = json.load(handle)
 
