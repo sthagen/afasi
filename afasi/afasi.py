@@ -58,6 +58,19 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
     return filter_table([(repl, ace) for repl, ace in table])
 
 
+def report_request(trans: Tuple[Tuple[str, str], ...]) -> List[str]:
+    """Generate report of request per list of lines."""
+    report = ['using these translations (in order):']
+    repl_col_width = max(len(repl) for repl, _ in trans) + 2
+    for rank, (repl, ace) in enumerate(trans, start=1):
+        lim_repl = "'" if "'" not in repl else ''
+        lim_ace = "'" if "'" not in ace else ''
+        repl_cell = f'{lim_repl}{repl}{lim_repl}'.ljust(repl_col_width)
+        report.append(f' {rank:>2d}. {repl_cell} -> {lim_ace}{ace}{lim_ace}')
+
+    return report + ['']
+
+
 def main(argv: Union[List[str], None] = None) -> int:
     """Drive the translation."""
     # ['translate', inp, out]
@@ -87,15 +100,7 @@ def main(argv: Union[List[str], None] = None) -> int:
         print('dryrun requested')
         return 0
 
-    print('using these translations (in order):')
-    repl_col_width = max(len(repl) for repl, _ in trans) + 2
-    for rank, (repl, ace) in enumerate(trans, start=1):
-        lim_repl = "'" if "'" not in repl else ''
-        lim_ace = "'" if "'" not in ace else ''
-        repl_cell = f'{lim_repl}{repl}{lim_repl}'.ljust(repl_col_width)
-        print(f' {rank:>2d}. {repl_cell} -> {lim_ace}{ace}{lim_ace}')
-
-    print()
+    print('\n'.join(report_request(trans))
     print(' ... later')
 
     return 0
