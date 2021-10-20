@@ -36,8 +36,14 @@ def test_main_target_file_exists():
         assert message in str(ex.value)
 
 
-def test_main_translate():
+def test_main_translate_dryrun_only():
     af.main(['translate', '', '', 'tests/fixtures/basic/fuzz.json', 'DRYRUN']) == 0
+
+
+def test_main_translate_for_real():
+    inp = 'tests/fixtures/basic/language.xml'
+    tab = 'tests/fixtures/basic/fuzz.json'
+    af.main(['translate', inp, '', tab, '']) == 0
 
 
 def test_load_translation_table_empty_path_string():
