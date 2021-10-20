@@ -31,7 +31,7 @@ def filter_table(pairs: List[List[str, str], ...]) -> Tuple[Tuple[str, str], ...
             pair = (s_repl, s_ace)
             if pair not in table:
                 table.append(pair)
-    
+
     return tuple(table)
 
 
