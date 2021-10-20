@@ -1,7 +1,7 @@
 [tool.pyflow]
 name = "afasi"
 py_version = "3.8"
-version = "2021.10.20"
+version = "2021.10.21"
 authors = ["Stefan Hagen <stefan@hagen.link>"]
 
 [tool.pyflow.scripts]
