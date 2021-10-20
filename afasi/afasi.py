@@ -24,7 +24,7 @@ DISPATCH = {
 def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
     """Load the translation table into a tuple of pairs."""
     if not path:
-        return (('', ''),)
+        raise ValueError('translation table path not given')
 
     with open(path, 'r', encoding=ENCODING) as handle:
         table = json.load(handle)
