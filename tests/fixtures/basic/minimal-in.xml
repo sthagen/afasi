@@ -7,7 +7,6 @@
             <source>Some Track</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Track</translation>
-            <translation>Lock</translation>
         </message>
         <message id="SOME_ROCK">
             <source>Some Rock</source>
