@@ -21,3 +21,7 @@ def test_main_unknown_command():
 
 def test_main_translate():
     af.main(['translate', '', '', 'tests/fixtures/basic/fuzz.json', 'DRYRUN']) == 0
+
+
+def test_load_translation_table_empty():
+    af.load_translation_table('') == (('', ''),)
