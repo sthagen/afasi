@@ -22,11 +22,21 @@ DISPATCH = {
 }
 
 
-def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
-    """Load the translation table into a tuple of pairs.
+def filter_table(pairs: List[List[str, str], ...]) -> Tuple[Tuple[str, str], ...]:
+    """Filter same -> same and redundant repl -> ace from redundant table of pairs."""
+    table = []
+    for repl, ace in pairs:
+        s_repl, s_ace = str(repl), str(ace)
+        if s_repl != s_ace:
+            pair = (s_repl, s_ace)
+            if pair not in table:
+                table.append(pair)
+    
+    return tuple(table)
 
-    Filter same -> same and redundant repl -> ace from source.
-    """
+
+def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
+    """Load the translation table into a tuple of unique non-idempotent pairs."""
     if not path:
         raise ValueError('translation table path not given')
 
@@ -35,25 +45,17 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
 
     with open(path, 'r', encoding=ENCODING) as handle:
         try:
-            table = json.load(handle)
+            pairs = json.load(handle)
         except JSONDecodeError:
             raise ValueError('translation table path must lead to a JSON file')
 
-    if not table:
+    if not pairs:
         raise ValueError('translation table is empty')
 
-    if any(len(pair) != 2 for pair in table):
+    if any(len(pair) != 2 for pair in pairs):
         raise ValueError('translation table is not array of two element arrays')
 
-    table = []
-    for repl, ace in table:
-        s_repl, s_ace = str(repl), str(ace)
-        if s_repl != s_ace:
-            pair = (s_repl, s_ace)
-            if pair not in table:
-                table.append(pair)
-
-    return tuple(table)
+    return filter_table(pairs)
 
 
 def main(argv: Union[List[str], None] = None) -> int:
