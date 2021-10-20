@@ -47,16 +47,17 @@ all: lint mypy testcov
 
 .PHONY: clean
 clean:
-	rm -rf `find . -name __pycache__`
-	rm -f `find . -type f -name '*.py[co]' `
-	rm -f `find . -type f -name '*~' `
-	rm -f `find . -type f -name '.*~' `
-	rm -rf .cache
-	rm -rf htmlcov
-	rm -rf *.egg-info
-	rm -f .coverage
-	rm -f .coverage.*
-	rm -rf build
-	rm -f afasi-report.*
+	@rm -rf `find . -name __pycache__`
+	@rm -f `find . -type f -name '*.py[co]' `
+	@rm -f `find . -type f -name '*~' `
+	@rm -f `find . -type f -name '.*~' `
+	@rm -rf .cache
+	@rm -rf htmlcov
+	@rm -rf *.egg-info
+	@rm -f .coverage
+	@rm -f .coverage.*
+	@rm -rf build
+	@rm -f afasi-report.*
+	@rm -f tests/fixtures/basic/minimal-out.xml
 	python setup.py clean
 
