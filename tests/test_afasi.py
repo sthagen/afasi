@@ -27,3 +27,9 @@ def test_load_translation_table_empty():
     message = 'translation table path not given'
     with pytest.raises(ValueError, match=message):
         af.load_translation_table('')
+
+
+def test_load_translation_table_wrong_file_format():
+    message = 'translation table path must lead to a JSON file'
+    with pytest.raises(ValueError, match=message):
+        af.load_translation_table('')
