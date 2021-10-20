@@ -11,21 +11,21 @@ def test_main_empty(capsys):
     message = 'received wrong number of arguments'
     af.main([]) == 2
     captured = capsys.readouterr()
-    assert message in captured.out
+    assert message in captured.err
 
 
 def test_main_unknown_command(capsys):
     message = 'received unknown command'
     af.main(['fabulate', '', '', '', 'DRYRUN']) == 2
     captured = capsys.readouterr()
-    assert message in captured.out
+    assert message in captured.err
 
 
 def test_main_source_is_no_file(capsys):
     message = 'source is no file'
     af.main(['translate', 'tests/', '', '', 'DRYRUN']) == 2
     captured = capsys.readouterr()
-    assert message in captured.out
+    assert message in captured.err
 
 
 def test_main_target_file_exists(capsys):
@@ -33,7 +33,7 @@ def test_main_target_file_exists(capsys):
     inp = 'tests/fixtures/basic/language.xml'
     af.main(['translate', inp, 'tests/fixtures/basic/existing_file.xml', '', 'DRYRUN']) == 2
     captured = capsys.readouterr()
-    assert message in captured.out
+    assert message in captured.err
 
 
 def test_main_target_file_does_not_exist_no_table_path(capsys):
@@ -41,7 +41,7 @@ def test_main_target_file_does_not_exist_no_table_path(capsys):
     inp = 'tests/fixtures/basic/language.xml'
     af.main(['translate', inp, 'tests/fixtures/basic/non_existing_file.xml', '', 'DRYRUN']) == 1
     captured = capsys.readouterr()
-    assert message in captured.out
+    assert message in captured.err
 
 
 def test_main_translate_dryrun_only():
@@ -88,4 +88,4 @@ def test_main_translate_minimal_for_real(capsys):
     af.main(['translate', inp, '', tab, '']) == 0
     captured = capsys.readouterr()
     for message in messages:
-        assert message in captured.out
+        assert message in captured.err
