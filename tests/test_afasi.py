@@ -78,7 +78,7 @@ def test_load_translation_table_with_non_pairs():
         af.load_translation_table(pathlib.Path('tests/fixtures/basic/triads.json'))
 
 
-def test_main_translate_minimal_for_real(capsys):
+def test_main_translate_minimal_for_real_stdout(capsys):
     inp = 'tests/fixtures/basic/minimal-in.xml'
     tab = 'tests/fixtures/basic/minimal.json'
     messages = (
@@ -89,3 +89,20 @@ def test_main_translate_minimal_for_real(capsys):
     captured = capsys.readouterr()
     for message in messages:
         assert message in captured.err
+
+
+def test_main_translate_minimal_for_real_to_file(capsys):
+    inp = 'tests/fixtures/basic/minimal-in.xml'
+    out = 'tests/fixtures/basic/minimal-out.xml'
+    tab = 'tests/fixtures/basic/minimal.json'
+    messages = (
+        "  1. '>Rock' -> '>Lounge'",
+        "  2. '>Track' -> '>Rock'",
+    )
+    af.main(['translate', inp, out, tab, '']) == 0
+    captured = capsys.readouterr()
+    for message in messages:
+        assert message in captured.err
+    assert pathlib.Path(out).is_file()
+    with open(out, 'rt', encoding=af.ENCODING) as handle:
+        assert any('            <translation>Lounge</translation>' in line for line in handle)

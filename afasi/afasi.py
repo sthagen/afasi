@@ -6,7 +6,7 @@ import os
 import pathlib
 import sys
 from json.decoder import JSONDecodeError
-from typing import List, Tuple, Union
+from typing import Iterator, List, Optional, Tuple, Union
 
 DEBUG_VAR = 'AFASI_DEBUG'
 DEBUG = os.getenv(DEBUG_VAR)
@@ -77,28 +77,42 @@ def replace(trans: Tuple[Tuple[str, str], ...], text: str) -> str:
     return text
 
 
-def main(argv: Union[List[str], None] = None) -> int:
-    """Drive the translation."""
-    # ['translate', inp, out]
+def reader(path: str) -> Iterator[str]:
+    """Context wrapper / generator to read the lines."""
+    with open(pathlib.Path(path), 'rt', encoding=ENCODING) as handle:
+        for line in handle:
+            yield line
+
+
+def verify_request(argv: Optional[List[str]]) -> Tuple[int, str, List[str]]:
+    """Gail with grace."""
     if not argv or len(argv) != 5:
-        print('received wrong number of arguments', file=sys.stderr)
-        return 2
+        return 2, 'received wrong number of arguments', ['']
 
     command, inp, out, translation_table_path, dryrun = argv
 
     if command not in ('translate'):
-        print('received unknown command', file=sys.stderr)
-        return 2
+        return 2, 'received unknown command', ['']
 
     if inp:
         if not pathlib.Path(str(inp)).is_file():
-            print('source is no file', file=sys.stderr)
-            return 1
+            return 1, 'source is no file', ['']
 
     if out:
         if pathlib.Path(str(out)).is_file():
-            print('target file exists', file=sys.stderr)
-            return 1
+            return 1, 'target file exists', ['']
+
+    return 0, '', argv
+
+
+def main(argv: Union[List[str], None] = None) -> int:
+    """Drive the translation."""
+    error, message, strings = verify_request(argv)
+    if error:
+        print(message, file=sys.stderr)
+        return error
+
+    command, inp, out, translation_table_path, dryrun = strings
 
     try:
         trans = load_translation_table(pathlib.Path(translation_table_path))
@@ -112,8 +126,13 @@ def main(argv: Union[List[str], None] = None) -> int:
         print('dryrun requested', file=sys.stderr)
         return 0
 
-    if not inp and not out:
-        for line in sys.stdin:
+    source = sys.stdin if not inp else reader(inp)
+    if out:
+        with open(pathlib.Path(out), 'wt', encoding=ENCODING) as target:
+            for line in source:
+                target.write(replace(trans, line))
+    else:
+        for line in source:
             sys.stdout.write(replace(trans, line))
 
     return 0
