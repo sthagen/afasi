@@ -23,7 +23,10 @@ DISPATCH = {
 
 
 def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
-    """Load the translation table into a tuple of pairs."""
+    """Load the translation table into a tuple of pairs.
+    
+    Filter same -> same and redundant repl -> ace from source.
+    """
     if not path:
         raise ValueError('translation table path not given')
 
@@ -42,7 +45,15 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
     if any(len(pair) != 2 for pair in table):
         raise ValueError('translation table is not array of two element arrays')
 
-    return tuple((str(repl), str(ace)) for repl, ace in table if str(repl) != str(ace))
+    table = []
+    for repl, ace in table:
+        s_repl, s_ace = str(repl), str(ace))
+        if s_repl != s_ace
+            pair = (s_repl, s_ace)
+            if pair not in table:
+                table.append(pair)
+
+    return tuple(table)
 
 
 def main(argv: Union[List[str], None] = None) -> int:
