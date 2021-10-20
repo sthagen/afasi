@@ -42,7 +42,7 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
     if any(len(pair) != 2 for pair in table):
         raise ValueError('translation table is not array of two element arrays')
 
-    return tuple((str(repl), str(ace)) for repl, ace in table)
+    return tuple((str(repl), str(ace)) for repl, ace in table if str(repl) != str(ace))
 
 
 def main(argv: Union[List[str], None] = None) -> int:
@@ -74,6 +74,15 @@ def main(argv: Union[List[str], None] = None) -> int:
         print('dryrun requested')
         return 0
 
-    print(trans)
+    print('using these translations (in order):')
+    repl_col_width = max(len(repl) for repl, _ in trans) + 2
+    for rank, (repl, ace) in enumerate(trans, start=1):
+        lim_repl = "'" if "'" not in repl else ''
+        lim_ace = "'" if "'" not in ace else ''
+        repl_cell = f'{lim_repl}{repl}{lim_repl}'.ljust(repl_col_width)
+        print(f' {rank:>2d}. {repl_cell} -> {lim_ace}{ace}{lim_ace}')
+
+    print()
+    print(' ... later')
 
     return 0
