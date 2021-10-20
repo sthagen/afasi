@@ -18,8 +18,6 @@ Experimental.
 
 # Use
 
-# Use
-
 <!-- MarkdownTOC -->
 
 - Examples
@@ -31,8 +29,8 @@ Experimental.
   - Example Translation Table
 - Command Line API
 - `afasi`
-- `afasi translate`
-- `afasi version`
+  - `afasi translate`
+  - `afasi version`
 
 <!-- /MarkdownTOC -->
 
@@ -186,7 +184,7 @@ $ afasi % diff -u minimal-*.xml
 
 <!-- /MarkdownTOC -->
 
-# `afasi`
+## `afasi`
 
 Fuzz a language by mixing up only few words.
 
@@ -196,11 +194,12 @@ The latter should be taken as a hint to maintain both language files in separate
 
 The translation table is an array or two element arrays provided as JSON and thus shall be in a shape like:
 
-
+```json
   [
     ["repl", "ace"],
     ["als", "othis"]
   ]
+```
 
 Default for input source is standard in and out per default is sent to standard out.
 
@@ -220,7 +219,7 @@ $ afasi [OPTIONS] COMMAND [ARGS]...
 * `translate`: Translate from a language to a 'langauge'.
 * `version`: Display the afasi version and exit
 
-## `afasi translate`
+### `afasi translate`
 
 Translate from a language to a 'langauge'.
 
@@ -244,7 +243,7 @@ Structure of table data is [["repl", "ace"], ["als", "othis"]]  [default: ]
 * `-n, --dryrun`: Flag to execute without writing the translation but a diff instead (default is False)  [default: False]
 * `-h, --help`: Show this message and exit.
 
-## `afasi version`
+### `afasi version`
 
 Display the afasi version and exit
 

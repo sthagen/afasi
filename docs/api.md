@@ -8,7 +8,7 @@
 
 <!-- /MarkdownTOC -->
 
-# `afasi`
+## `afasi`
 
 Fuzz a language by mixing up only few words.
 
@@ -43,7 +43,7 @@ $ afasi [OPTIONS] COMMAND [ARGS]...
 * `translate`: Translate from a language to a 'langauge'.
 * `version`: Display the afasi version and exit
 
-## `afasi translate`
+### `afasi translate`
 
 Translate from a language to a 'langauge'.
 
@@ -67,7 +67,7 @@ Structure of table data is [["repl", "ace"], ["als", "othis"]]  [default: ]
 * `-n, --dryrun`: Flag to execute without writing the translation but a diff instead (default is False)  [default: False]
 * `-h, --help`: Show this message and exit.
 
-## `afasi version`
+### `afasi version`
 
 Display the afasi version and exit
 
