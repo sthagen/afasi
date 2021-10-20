@@ -24,7 +24,7 @@ def test_main_unknown_command():
 def test_main_source_is_no_file():
     message = 'source is no file'
     with pytest.raises(UserWarning) as ex:
-        af.main(['fabulate', 'tests/', '', '', 'DRYRUN']) == 2
+        af.main(['translate', 'tests/', '', '', 'DRYRUN']) == 2
         assert message in str(ex.value)
 
 
