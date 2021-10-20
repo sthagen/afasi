@@ -56,14 +56,6 @@ def main(argv: Union[List[str], None] = None) -> int:
             warnings.warn('source is no file')
             return 1
 
-    if not translation_table_path:
-        warnings.warn('translation table needed')
-        return 1
-
-    if not pathlib.Path(str(translation_table_path)).is_file():
-        warnings.warn('translation table path is no file')
-        return 1
-
     if out:
         if pathlib.Path(str(out)).is_file():
             warnings.warn('target file exists')
