@@ -22,7 +22,7 @@ DISPATCH = {
 }
 
 
-def filter_table(pairs: List[List[str, str], ...]) -> Tuple[Tuple[str, str], ...]:
+def filter_table(pairs: List[Tuple[str, str]]) -> Tuple[Tuple[str, str], ...]:
     """Filter same -> same and redundant repl -> ace from redundant table of pairs."""
     table = []
     for repl, ace in pairs:
@@ -45,17 +45,17 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
 
     with open(path, 'r', encoding=ENCODING) as handle:
         try:
-            pairs = json.load(handle)
+            table = json.load(handle)
         except JSONDecodeError:
             raise ValueError('translation table path must lead to a JSON file')
 
-    if not pairs:
+    if not table:
         raise ValueError('translation table is empty')
 
-    if any(len(pair) != 2 for pair in pairs):
+    if any(len(entry) != 2 for entry in table):
         raise ValueError('translation table is not array of two element arrays')
 
-    return filter_table(pairs)
+    return filter_table([(repl, ace) for repl, ace in table])
 
 
 def main(argv: Union[List[str], None] = None) -> int:
