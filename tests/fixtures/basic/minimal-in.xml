@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="en_XY">
+    <context>
+        <name>Some::Id::String</name>
+        <message id="SOME_TRACK">
+            <source>Track</source>
+            <extracomment>Does not matter.</extracomment>
+            <translation>Track</translation>
+            <translation>Lock</translation>
+        </message>
+        <message id="SOME_ROCK">
+            <source>Rock</source>
+            <extracomment>Does not matter.</extracomment>
+            <translation>Rock</translation>
+        </message>
+    </context>
+</TS>
