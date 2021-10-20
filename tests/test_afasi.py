@@ -32,4 +32,4 @@ def test_load_translation_table_empty():
 def test_load_translation_table_wrong_file_format():
     message = 'translation table path must lead to a JSON file'
     with pytest.raises(ValueError, match=message):
-        af.load_translation_table('')
+        af.load_translation_table('tests/fixtures/basic/fuzz.py')
