@@ -4,13 +4,13 @@
     <context>
         <name>Some::Id::String</name>
         <message id="SOME_TRACK">
-            <source>Track</source>
+            <source>Some Track</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Track</translation>
             <translation>Lock</translation>
         </message>
         <message id="SOME_ROCK">
-            <source>Rock</source>
+            <source>Some Rock</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Rock</translation>
         </message>

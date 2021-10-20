@@ -4,38 +4,38 @@
     <context>
         <name>Some::Id::String</name>
         <message id="SOME_TRACK">
-            <source>Track</source>
+            <source>Some Track</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Track</translation>
             <translation>Lock</translation>
         </message>
         <message id="ANOTHER_TRACK">
-            <source>Track</source>
+            <source>Some Track</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Track</translation>
         </message>
         <message id="SOME_ROCK">
-            <source>Rock</source>
+            <source>Some Rock</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Rock</translation>
         </message>
         <message id="SOME_AUTOTRACK_RANGE">
-            <source>Autotrack range [rpm]</source>
+            <source>Some Autotrack range [rpm]</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Autotrack range [rpm]</translation>
         </message>
         <message id="YET_ANOTHER_TRACK">
-            <source>Track</source>
+            <source>Yet another Track</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Track</translation>
         </message>
         <message id="WHY_NOT_A_TRACK_RADIUS">
-            <source>Track radius</source>
+            <source>Why not a Track radius</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Track radius</translation>
         </message>
         <message id="AND_MAYBE_A_ROCK_RADIUS">
-            <source>Rock radius</source>
+            <source>And maybe a Rock radius</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Rock radius</translation>
         </message>
@@ -50,17 +50,17 @@
             <translation>Something with rock range set</translation>
         </message>
         <message id="SOME_SCAN_IS_LARGER_THAN_TRACK">
-            <source>Scan is larger than track range</source>
+            <source>Some Scan is larger than track range</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Scan is larger than track range</translation>
         </message>
         <message id="SOME_TRACK_RANGE_IS_BETWEEN_SCAN_AND_LOCK">
-            <source>Track range is between scan and rock range</source>
+            <source>Some Track range is between scan and rock range</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Track range is between scan and rock range</translation>
         </message>
         <message id="SOME_ROCK_RANGE_IS_SMALLER_THAN_TRACK">
-            <source>Rock range is smaller than track range</source>
+            <source>Some Rock range is smaller than track range</source>
             <extracomment>Does not matter.</extracomment>
             <translation>Rock range is smaller than track range</translation>
         </message>
