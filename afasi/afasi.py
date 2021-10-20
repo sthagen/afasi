@@ -125,8 +125,10 @@ def main(argv: Union[List[str], None] = None) -> int:
     if dryrun:
         print('dryrun requested\n# ---', file=sys.stderr)
         print('* resources used:', file=sys.stderr)
-        print(f'  - input from:       "{"STDIN" if not inp else inp}"', file=sys.stderr)
-        print(f'  - output to:        "{"STDOUT" if not out else out}"', file=sys.stderr)
+        inp_disp = "STDIN" if not inp else f'"{inp}"'
+        out_disp = "STDOUT" if not out else f'"{out}"'
+        print(f'  - input from:       {inp_disp}', file=sys.stderr)
+        print(f'  - output to:        {out_disp}', file=sys.stderr)
         print(f'  - translation from: "{translation_table_path}"', file=sys.stderr)
         print('\n'.join(report_request(trans)), end='', file=sys.stderr)
         src, tgt = [], []
