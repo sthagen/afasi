@@ -25,7 +25,7 @@ def test_main_translate():
     af.main(['translate', '', '', 'tests/fixtures/basic/fuzz.json', 'DRYRUN']) == 0
 
 
-def test_load_translation_table_empty():
+def test_load_translation_table_empty_path_string():
     message = 'translation table path not given'
     with pytest.raises(ValueError, match=message):
         af.load_translation_table('')
@@ -35,3 +35,15 @@ def test_load_translation_table_wrong_file_format():
     message = 'translation table path must lead to a JSON file'
     with pytest.raises(ValueError, match=message):
         af.load_translation_table(pathlib.Path('tests/fixtures/basic/fuzz.py'))
+
+
+def test_load_translation_table_as_empty():
+    message = 'translation table is empty'
+    with pytest.raises(ValueError, match=message):
+        af.load_translation_table(pathlib.Path('tests/fixtures/basic/empty.json'))
+
+
+def test_load_translation_table_with_non_pairs():
+    message = 'translation table is not array of two element arrays'
+    with pytest.raises(ValueError, match=message):
+        af.load_translation_table(pathlib.Path('tests/fixtures/basic/triads.json'))
