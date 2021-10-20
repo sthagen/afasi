@@ -28,6 +28,14 @@ def test_main_source_is_no_file():
         assert message in str(ex.value)
 
 
+def test_main_target_file_exists():
+    message = 'target file exists'
+    inp = 'tests/fixtures/basic/language.xml'
+    with pytest.raises(UserWarning) as ex:
+        af.main(['translate', inp, 'tests/fixtures/basic/existing_file.xml', '', 'DRYRUN']) == 2
+        assert message in str(ex.value)
+
+
 def test_main_translate():
     af.main(['translate', '', '', 'tests/fixtures/basic/fuzz.json', 'DRYRUN']) == 0
 
