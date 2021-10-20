@@ -55,9 +55,19 @@ def callback(
 def translate(
     source: str = typer.Argument(af.STDIN),
     target: str = typer.Argument(af.STDOUT),
-    inp: str = typer.Option('', '-i', '--input', help='Path to input file (default is reading from standard in)'),
+    inp: str = typer.Option(
+        '', 
+        '-i', 
+        '--input', 
+        help='Path to input file (default is reading from standard in)',
+        metavar='<sourcepath>',
+    ),
     out: str = typer.Option(
-        '', '-o', '--output', help='Path to non-existing output file (default is writing to standard out)'
+        '', 
+        '-o', 
+        '--output', 
+        help='Path to non-existing output file (default is writing to standard out)', 
+        metavar='<targetpath>',
     ),
     translation_table_path: str = typer.Option(
         '',
@@ -67,12 +77,14 @@ def translate(
             'Path to translation table file in JSON format.'
             '\nStructure of table data is [["repl", "ace"], ["als", "othis"]]'
         ),
+        metavar='<translation table path>',
     ),
     dry: bool = typer.Option(
         False,
         '-n',
         '--dryrun',
         help='Flag to execute without writing the translation but a diff instead (default is False)',
+        metavar='bool',
     ),
 ) -> int:
     """
