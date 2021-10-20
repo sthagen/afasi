@@ -6,6 +6,7 @@ import os
 import pathlib
 import sys
 import warnings
+from json.decoder import JSONDecodeError
 from typing import List, Tuple, Union
 
 DEBUG_VAR = 'AFASI_DEBUG'
@@ -30,7 +31,10 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
         raise ValueError('translation table path must lead to a file')
 
     with open(path, 'r', encoding=ENCODING) as handle:
-        table = json.load(handle)
+        try:
+            table = json.load(handle)
+        except JSONDecodeError as err:
+            raise ValueError('translation table path must lead to a JSON file')
 
     if not table:
         raise ValueError('translation table is empty')
