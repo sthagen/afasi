@@ -5,7 +5,6 @@ import json
 import os
 import pathlib
 import sys
-import warnings
 from json.decoder import JSONDecodeError
 from typing import List, Tuple, Union
 
@@ -75,26 +74,30 @@ def main(argv: Union[List[str], None] = None) -> int:
     """Drive the translation."""
     # ['translate', inp, out]
     if not argv or len(argv) != 5:
-        warnings.warn('received wrong number of arguments')
+        print('received wrong number of arguments')
         return 2
 
     command, inp, out, translation_table_path, dryrun = argv
 
     if command not in ('translate'):
-        warnings.warn('received unknown command')
+        print('received unknown command')
         return 2
 
     if inp:
         if not pathlib.Path(str(inp)).is_file():
-            warnings.warn('source is no file')
+            print('source is no file')
             return 1
 
     if out:
         if pathlib.Path(str(out)).is_file():
-            warnings.warn('target file exists')
+            print('target file exists')
             return 1
 
-    trans = load_translation_table(pathlib.Path(translation_table_path))
+    try:
+        trans = load_translation_table(pathlib.Path(translation_table_path))
+    except ValueError as err:
+        print(err)
+        return 1
 
     if dryrun:
         print('dryrun requested')

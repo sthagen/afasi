@@ -95,7 +95,7 @@ def translate(
     outgoing = out if out else (target if target != af.STDOUT else '')
     dryrun = 'DRYRUN' if dry else ''
     action = [command, incoming, outgoing, translation_table_path, dryrun]
-    return af.main(action)
+    return sys.exit(af.main(action))
 
 
 @app.command('version')

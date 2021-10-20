@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=missing-docstring,unused-import,reimported
-import pytest
 from typer.testing import CliRunner
 
 import afasi
@@ -22,8 +21,8 @@ def test_app_translate():
     assert result.exit_code == 1
 
 
-def test_cli_main():
+def test_cli_main(capsys):
     message = 'received wrong number of arguments'
-    with pytest.raises(UserWarning, match=message) as ex:
-        cli.main(['translate', 'no_file_there']) == 1
-        assert message in str(ex.value)
+    cli.main(['translate', 'no_file_there']) == 1
+    captured = capsys.readouterr()
+    assert message in captured.out

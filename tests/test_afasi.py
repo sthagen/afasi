@@ -7,41 +7,41 @@ import pytest
 import afasi.afasi as af
 
 
-def test_main_empty():
+def test_main_empty(capsys):
     message = 'received wrong number of arguments'
-    with pytest.raises(UserWarning) as ex:
-        af.main([]) == 2
-        assert message in str(ex.value)
+    af.main([]) == 2
+    captured = capsys.readouterr()
+    assert message in captured.out
 
 
-def test_main_unknown_command():
-    message = 'received wrong number of arguments'
-    with pytest.raises(UserWarning) as ex:
-        af.main(['fabulate', '', '', '', 'DRYRUN']) == 2
-        assert message in str(ex.value)
+def test_main_unknown_command(capsys):
+    message = 'received unknown command'
+    af.main(['fabulate', '', '', '', 'DRYRUN']) == 2
+    captured = capsys.readouterr()
+    assert message in captured.out
 
 
-def test_main_source_is_no_file():
+def test_main_source_is_no_file(capsys):
     message = 'source is no file'
-    with pytest.raises(UserWarning) as ex:
-        af.main(['translate', 'tests/', '', '', 'DRYRUN']) == 2
-        assert message in str(ex.value)
+    af.main(['translate', 'tests/', '', '', 'DRYRUN']) == 2
+    captured = capsys.readouterr()
+    assert message in captured.out
 
 
-def test_main_target_file_exists():
+def test_main_target_file_exists(capsys):
     message = 'target file exists'
     inp = 'tests/fixtures/basic/language.xml'
-    with pytest.raises(UserWarning) as ex:
-        af.main(['translate', inp, 'tests/fixtures/basic/existing_file.xml', '', 'DRYRUN']) == 2
-        assert message in str(ex.value)
+    af.main(['translate', inp, 'tests/fixtures/basic/existing_file.xml', '', 'DRYRUN']) == 2
+    captured = capsys.readouterr()
+    assert message in captured.out
 
 
-def test_main_target_file_does_not_exist_no_table_path():
-    message = 'translation table path not given'
+def test_main_target_file_does_not_exist_no_table_path(capsys):
+    message = 'translation table path must lead to a fil'
     inp = 'tests/fixtures/basic/language.xml'
-    with pytest.raises(ValueError) as ex:
-        af.main(['translate', inp, 'tests/fixtures/basic/non_existing_file.xml', '', 'DRYRUN']) == 2
-        assert message in str(ex.value)
+    af.main(['translate', inp, 'tests/fixtures/basic/non_existing_file.xml', '', 'DRYRUN']) == 1
+    captured = capsys.readouterr()
+    assert message in captured.out
 
 
 def test_main_translate_dryrun_only():
