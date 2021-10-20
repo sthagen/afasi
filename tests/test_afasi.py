@@ -21,6 +21,13 @@ def test_main_unknown_command():
         assert message in str(ex.value)
 
 
+def test_main_source_is_no_file():
+    message = 'source is no file'
+    with pytest.raises(UserWarning) as ex:
+        af.main(['fabulate', 'tests/', '', '', 'DRYRUN']) == 2
+        assert message in str(ex.value)
+
+
 def test_main_translate():
     af.main(['translate', '', '', 'tests/fixtures/basic/fuzz.json', 'DRYRUN']) == 0
 
