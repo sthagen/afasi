@@ -1,10 +1,31 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=missing-docstring,unused-import,reimported
+import difflib
 import pathlib
 
 import pytest
 
 import afasi.afasi as af
+
+DIFF_FOR_MINIMAL = """\
+--- tests/fixtures/basic/minimal-in.xml
++++ tests/fixtures/basic/minimal-out.xml
+@@ -6,12 +6,12 @@
+         <message id="SOME_TRACK">
+             <source>Some Track</source>
+             <extracomment>Does not matter.</extracomment>
+-            <translation>Track</translation>
++            <translation>Rock</translation>
+         </message>
+         <message id="SOME_ROCK">
+             <source>Some Rock</source>
+             <extracomment>Does not matter.</extracomment>
+-            <translation>Rock</translation>
++            <translation>Lounge</translation>
+         </message>
+     </context>
+ </TS>
+"""
 
 
 def test_main_empty(capsys):
@@ -104,5 +125,13 @@ def test_main_translate_minimal_for_real_to_file(capsys):
     for message in messages:
         assert message in captured.err
     assert pathlib.Path(out).is_file()
+
     with open(out, 'rt', encoding=af.ENCODING) as handle:
         assert any('            <translation>Lounge</translation>' in line for line in handle)
+
+    with open(inp, 'rt', encoding=af.ENCODING) as handle:
+        src = handle.readlines()
+    with open(out, 'rt', encoding=af.ENCODING) as handle:
+        tgt = handle.readlines()
+
+    assert DIFF_FOR_MINIMAL == ''.join(line for line in difflib.unified_diff(src, tgt, fromfile=inp, tofile=out))
