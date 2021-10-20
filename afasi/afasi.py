@@ -29,7 +29,10 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
     with open(path, 'r', encoding=ENCODING) as handle:
         table = json.load(handle)
 
-    if len(table) != 1:
+    if not table:
+        raise ValueError('translation table is empty')
+
+    if any(len(pair) != 2 for pair in table):
         raise ValueError('translation table is not array of two element arrays')
 
     return tuple((str(repl), str(ace)) for repl, ace in table)
@@ -38,11 +41,11 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
 def main(argv: Union[List[str], None] = None) -> int:
     """Drive the translation."""
     # ['translate', inp, out]
-    if not argv or len(argv) != 4:
+    if not argv or len(argv) != 5:
         warnings.warn('received wrong number of arguments')
         return 2
 
-    command, inp, translation_table_path, out = argv
+    command, inp, out, translation_table_path, dryrun = argv
 
     if command not in ('translate'):
         warnings.warn('received unknown command')
@@ -67,6 +70,11 @@ def main(argv: Union[List[str], None] = None) -> int:
             return 1
 
     trans = load_translation_table(pathlib.Path(translation_table_path))
+
+    if dryrun:
+        print('dryrun requested')
+        return 0
+
     print(trans)
 
     return 0
