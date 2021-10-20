@@ -37,10 +37,14 @@ def callback(
     Which should be seen as a hint to maintain both language files in separate entities not as a patch task.
 
     The translation table is an array or two element arrays provided as JSON and is expected have the shape:
-    \n[
-    \n  ["repl", "ace"],
-    \n  ["als", "othis"]
-    \n]
+    
+    \b
+    [
+      ["repl", "ace"],
+      ["als", "othis"]
+    ]
+    
+    Defaults for input source is standard in and out sent to standard out.
     """
     if version:
         typer.echo(f'{APP_NAME} version {afasi.__version__}')
