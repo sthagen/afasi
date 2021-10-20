@@ -76,3 +76,16 @@ def test_load_translation_table_with_non_pairs():
     message = 'translation table is not array of two element arrays'
     with pytest.raises(ValueError, match=message):
         af.load_translation_table(pathlib.Path('tests/fixtures/basic/triads.json'))
+
+
+def test_main_translate_minimal_for_real(capsys):
+    inp = 'tests/fixtures/basic/minimal-in.xml'
+    tab = 'tests/fixtures/basic/minimal.json'
+    messages = (
+        "  1. '>Rock' -> '>Lounge'",
+        "  2. '>Track' -> '>Rock'",
+    )
+    af.main(['translate', inp, '', tab, '']) == 0
+    captured = capsys.readouterr()
+    for message in messages:
+        assert message in captured.out

@@ -60,7 +60,7 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
 def report_request(trans: Tuple[Tuple[str, str], ...]) -> List[str]:
     """Generate report of request per list of lines."""
     report = ['using these translations (in order):']
-    repl_col_width = max(len(repl) for repl, _ in trans) + 2
+    repl_col_width = max(len(repl) for repl, _ in trans) + 1
     for rank, (repl, ace) in enumerate(trans, start=1):
         lim_repl = "'" if "'" not in repl else ''
         lim_ace = "'" if "'" not in ace else ''
