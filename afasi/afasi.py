@@ -100,7 +100,7 @@ def main(argv: Union[List[str], None] = None) -> int:
         print('dryrun requested')
         return 0
 
-    print('\n'.join(report_request(trans))
+    print('\n'.join(report_request(trans)))
     print(' ... later')
 
     return 0
