@@ -48,7 +48,7 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
     table = []
     for repl, ace in table:
         s_repl, s_ace = str(repl), str(ace)
-        if s_repl != s_ace
+        if s_repl != s_ace:
             pair = (s_repl, s_ace)
             if pair not in table:
                 table.append(pair)
