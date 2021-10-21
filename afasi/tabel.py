@@ -11,7 +11,7 @@ ENCODING = 'utf-8'
 class Table:
     """Translation table."""
 
-    __slots__ = ['description', 'contra', 'count', 'pro', 'translations']
+    __slots__ = ['description', 'contra', 'count', 'flip_is_stop', 'flip_flop', 'pro', 'translations']
 
     @typing.no_type_check
     def __init__(self, **kwargs):
@@ -30,9 +30,13 @@ class Table:
     @typing.no_type_check
     def __str__(self):
         """Human readable rendition esp. for debugging."""
+        ff = "'" + "'\n    '".join(switch for switch in self.flip_flop) + "'"
         return (
             f'table:\n  {self.description=}\n'
             f'  {self.contra=}\n'
+            f'  {self.count=}\n'
+            f'  {self.flip_is_stop=}\n'
+            f'  flip_flop:\n    {ff}\n'
             f'  {self.count=}\n'
             f'  {self.pro=}\n'
             f'  translations:\n    {"    ".join(str(translation) for translation in self.translations)}\n'
@@ -71,6 +75,11 @@ DATA = """\
       "source"
     ],
     "count": 0,
+    "flip_is_stop": true,
+    "flip_flop": [
+      "<message id=\\"SOME_TRACK\\">",
+      "</message>"
+    ],
     "pro": [
       "translation"
     ]

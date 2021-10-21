@@ -6,6 +6,11 @@
       "source"
     ],
     "count": 0,
+    "flip_is_stop": true,
+    "flip_flop": [
+      "<message id=\"SOME_TRACK\">",
+      "</message>"
+    ],
     "pro": [
       "translation"
     ]
