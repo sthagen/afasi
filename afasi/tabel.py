@@ -11,11 +11,12 @@ ENCODING = 'utf-8'
 class Table:
     """Translation table."""
 
-    __slots__ = ['description', 'contra', 'count', 'flip_is_stop', 'flip_flop', 'pro', 'translations']
+    __slots__ = ['description', 'contra', 'count', 'flip_is_stop', 'flip_flop', 'pro', 'ff_state', 'translations']
 
     @typing.no_type_check
     def __init__(self, **kwargs):
         """Instance created from dictionary usually stored in a JSON file."""
+        self.ff_state = True
         for key, value in kwargs.items():
             if key == 'table':
                 for me, ta in value.items():
@@ -30,12 +31,23 @@ class Table:
     @typing.no_type_check
     def translate(self, text: str) -> str:
         """Sequenced replacer (WIP)."""
-        if any(stop in text for stop in self.contra):
-            return text
+        if self.flip_flop:
+            for pos, token in enumerate(self.flip_flop, start=1):
+                if token not in text:
+                    continue
+                else:
+                    if self.flip_is_stop:
+                        self.ff_state = False if pos % 2 else True
+                    else:
+                        self.ff_state = True if pos % 2 else False
 
-        if any(start in text for start in self.pro):
-            for rule in self.translations:
-                text = rule.apply(text)
+        if self.ff_state:
+            if any(stop in text for stop in self.contra):
+                return text
+
+            if any(start in text for start in self.pro):
+                for rule in self.translations:
+                    text = rule.apply(text)
 
         return text
 

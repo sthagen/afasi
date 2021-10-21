@@ -48,6 +48,60 @@ TABLE_DATA = """\
 }
 """
 
+TABLE_DATA_FLOP_IS_STOP = TABLE_DATA.replace('true', 'false')
+
+FLIP_FLOP_DATA = """\
+        <message id="SOME_TRACK">
+            <source>Some Track</source>
+            <extracomment>Does not matter.</extracomment>
+            <translation>Track</translation>
+        </message>
+        <message id="ANOTHER_TRACK">
+            <source>Some Track</source>
+            <extracomment>Does not matter.</extracomment>
+            <translation>Track</translation>
+        </message>
+"""
+
+FLIP_FLOP_TRANSLATED = """\
+        <message id="SOME_TRACK">
+            <source>Some Track</source>
+            <extracomment>Does not matter.</extracomment>
+            <translation>Track</translation>
+        </message>
+        <message id="ANOTHER_TRACK">
+            <source>Some Track</source>
+            <extracomment>Does not matter.</extracomment>
+            <translation>Lock</translation>
+        </message>
+"""
+
+FLOP_FLIP_TRANSLATED = """\
+        <message id="SOME_TRACK">
+            <source>Some Track</source>
+            <extracomment>Does not matter.</extracomment>
+            <translation>Lock</translation>
+        </message>
+        <message id="ANOTHER_TRACK">
+            <source>Some Track</source>
+            <extracomment>Does not matter.</extracomment>
+            <translation>Track</translation>
+        </message>
+"""
+
+FULLY_TRANSLATED = """\
+        <message id="SOME_TRACK">
+            <source>Some Track</source>
+            <extracomment>Does not matter.</extracomment>
+            <translation>Lock</translation>
+        </message>
+        <message id="ANOTHER_TRACK">
+            <source>Some Track</source>
+            <extracomment>Does not matter.</extracomment>
+            <translation>Lock</translation>
+        </message>
+"""
+
 
 def test_translation_init_from_dict():
     data = {'repl': '>Autotrack', 'ace': '>Autolock'}
@@ -91,3 +145,32 @@ def test_table_translate_twice_contra_once_pro_once_no():
     assert table.translate('<extracomment>Autotrack') == '<extracomment>Autotrack'
     assert table.translate('<translation>Autotrack') == '<translation>Autolock'
     assert table.translate('<noitalsnart>Autotrack') == '<noitalsnart>Autotrack'
+
+
+def test_table_translate_flip_flop_some():
+    table = tb.Table(**json.loads(TABLE_DATA))
+    translation = []
+    for line in FLIP_FLOP_DATA.split('\n'):
+        translation.append(table.translate(line))
+    for out, exp in zip(translation, FLIP_FLOP_TRANSLATED.split('\n')):
+        assert out == exp
+
+
+def test_table_translate_flop_flip_some():
+    table = tb.Table(**json.loads(TABLE_DATA_FLOP_IS_STOP))
+    translation = []
+    for line in FLIP_FLOP_DATA.split('\n'):
+        translation.append(table.translate(line))
+    for out, exp in zip(translation, FLOP_FLIP_TRANSLATED.split('\n')):
+        assert out == exp
+
+
+def test_table_translate_no_flip_flop_some():
+    no_ff_data = json.loads(TABLE_DATA)
+    no_ff_data['table']['flip_flop'] = []
+    table = tb.Table(**no_ff_data)
+    translation = []
+    for line in FLIP_FLOP_DATA.split('\n'):
+        translation.append(table.translate(line))
+    for out, exp in zip(translation, FULLY_TRANSLATED.split('\n')):
+        assert out == exp
