@@ -2,12 +2,18 @@
 # pylint: disable=expression-not-assigned,line-too-long
 """Tabel (Danish for Table). Class API."""
 import json
-import pathlib
+import typing
 
 
-class Table:
+@typing.no_type_check
+class Table:  # type: ignore
+    """Translation table."""
+
     __slots__ = ['description', 'contra', 'count', 'pro', 'translations']
+
+    @typing.no_type_check
     def __init__(self, **kwargs):
+        """Instance created from dictionary usually stored in a JSON file."""
         for key, value in kwargs.items():
             if key == 'table':
                 for me, ta in value.items():
@@ -19,12 +25,34 @@ class Table:
             else:
                 print(f'ignored ({key} -> {value}')
 
+    @typing.no_type_check
+    def __str__(self):
+        """Human readable rendition esp. for debugging."""
+        return (
+            f'table:\n  {self.description=}\n'
+            f'  {self.contra=}\n'
+            f'  {self.count=}\n'
+            f'  {self.pro=}\n'
+            f'  translations:\n    {"    ".join(str(translation) for translation in self.translations)}\n'
+        )
 
-class Translation:
+
+@typing.no_type_check
+class Translation:  # type: ignore
+    """Translation task."""
+
     __slots__ = ['repl', 'ace']
+
+    @typing.no_type_check
     def __init__(self, **kwargs):
+        """Instance created from dictionary."""
         for key, value in kwargs.items():
             setattr(self, key, value)
+
+    @typing.no_type_check
+    def __str__(self):
+        """Human readable rendition esp. for debugging."""
+        return f'{self.repl=} -> {self.ace=}\n'
 
 
 DATA = """\
@@ -65,5 +93,5 @@ DATA = """\
 }
 """
 
-data = json.loads(DATA)
-print(Table(**data).description)
+table = Table(**json.loads(DATA))
+print(table)
