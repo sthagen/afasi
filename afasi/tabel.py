@@ -2,11 +2,13 @@
 # pylint: disable=expression-not-assigned,line-too-long
 """Tabel (Danish for Table). Class API."""
 import json
+import pathlib
 import typing
 
+ENCODING = 'utf-8'
 
-@typing.no_type_check
-class Table:  # type: ignore
+
+class Table:
     """Translation table."""
 
     __slots__ = ['description', 'contra', 'count', 'pro', 'translations']
@@ -23,7 +25,7 @@ class Table:  # type: ignore
                 for entry in value:
                     self.translations.append(Translation(**entry))
             else:
-                print(f'ignored ({key} -> {value}')
+                print(f'table ignored ({key=} -> {value=})')
 
     @typing.no_type_check
     def __str__(self):
@@ -37,8 +39,7 @@ class Table:  # type: ignore
         )
 
 
-@typing.no_type_check
-class Translation:  # type: ignore
+class Translation:
     """Translation task."""
 
     __slots__ = ['repl', 'ace']
@@ -55,6 +56,12 @@ class Translation:  # type: ignore
         return f'{self.repl=} -> {self.ace=}\n'
 
 
+def load_table(path: pathlib.Path) -> typing.Any:
+    """Generate Table instance from JSON file."""
+    with open(path, 'rt', encoding=ENCODING) as dump:
+        return Table(**json.load(dump))
+
+
 DATA = """\
 {
   "table": {
@@ -68,6 +75,7 @@ DATA = """\
       "translation"
     ]
   },
+  "foo": "bar",
   "translations": [
     {
       "repl": ">Lock",
@@ -94,4 +102,8 @@ DATA = """\
 """
 
 table = Table(**json.loads(DATA))
-print(table)
+print('Table from string:')
+print(table, end='')
+other = load_table(pathlib.Path('tests/fixtures/basic/translation.json'))
+print('Table from file:')
+print(other, end='')
