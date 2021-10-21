@@ -72,3 +72,8 @@ def test_table_init_from_json_file(tmp_path):
     table = tb.load_table(p)
     assert table.flip_is_stop is True
     assert table.pro == ['translation']
+
+
+def test_table_translate_once():
+    table = tb.Table(**json.loads(TABLE_DATA))
+    assert table.translate('>Autotrack') == '>Autolock'

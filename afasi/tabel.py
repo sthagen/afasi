@@ -28,6 +28,13 @@ class Table:
                 print(f'table ignored ({key=} -> {value=})')
 
     @typing.no_type_check
+    def translate(self, text: str) -> str:
+        """Sequenced replacer (WIP)."""
+        for rule in self.translations:
+            text = text.replace(rule.repl, rule.ace)
+        return text
+
+    @typing.no_type_check
     def __str__(self):
         """Human readable rendition esp. for debugging."""
         ff = "'" + "'\n    '".join(switch for switch in self.flip_flop) + "'"
