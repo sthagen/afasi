@@ -58,7 +58,7 @@ def test_main_target_file_exists(capsys):
 
 
 def test_main_target_file_does_not_exist_no_table_path(capsys):
-    message = 'translation table path must lead to a fil'
+    message = 'neither plain old parallel array nor object table data given'
     inp = 'tests/fixtures/basic/language.xml'
     af.main(['translate', inp, 'tests/fixtures/basic/non_existing_file.xml', '', 'DRYRUN']) == 1
     captured = capsys.readouterr()
@@ -68,6 +68,11 @@ def test_main_target_file_does_not_exist_no_table_path(capsys):
 def test_main_translate_dryrun_only():
     inp = 'tests/fixtures/basic/language.xml'
     af.main(['translate', inp, '', 'tests/fixtures/basic/fuzz.json', 'DRYRUN']) == 0
+
+
+def test_main_translate_augmented_dryrun_only():
+    inp = 'tests/fixtures/basic/language.xml'
+    af.main(['translate', inp, '', 'tests/fixtures/basic/translation.json', 'DRYRUN']) == 0
 
 
 def test_main_translate_for_real():
@@ -106,6 +111,25 @@ def test_main_translate_minimal_for_real_stdout(capsys):
     af.main(['translate', inp, '', tab, '']) == 0
     captured = capsys.readouterr()
     assert captured.err == ''
+
+
+def test_main_translate_augmented_for_real_stdout(capsys):
+    inp = 'tests/fixtures/basic/language.xml'
+    tab = 'tests/fixtures/basic/translation.json'
+    af.main(['translate', inp, '', tab, '']) == 0
+    captured = capsys.readouterr()
+    assert captured.err == ''
+
+
+def test_main_translate_augmented_for_real_to_file_no_diff(capsys, tmp_path):
+    inp = 'tests/fixtures/basic/language.xml'
+    out_fake = 'language-out.xml'
+    out = tmp_path / out_fake
+    tab = 'tests/fixtures/basic/translation.json'
+    af.main(['translate', inp, out, tab, '']) == 0
+    captured = capsys.readouterr()
+    assert captured.err == ''
+    assert pathlib.Path(out).is_file()
 
 
 def test_main_translate_minimal_for_real_to_file(capsys, tmp_path):

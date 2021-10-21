@@ -18,6 +18,50 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 
+TEMPLATE_EXAMPLE = """\
+{
+  "table": {
+    "description": "table level default constraints, row attributes do replace those if present.",
+    "contra": [
+      "extracomment",
+      "source"
+    ],
+    "count": 0,
+    "flip_is_stop": true,
+    "flip_flop": [
+      "<message id=\\"SOME_TRACK\\">",
+      "</message>"
+    ],
+    "pro": [
+      "translation"
+    ]
+  },
+  "foo": "bar",
+  "translations": [
+    {
+      "repl": ">Lock",
+      "ace": ">Launch"
+    },
+    {
+      "repl": ">Track",
+      "ace": ">Lock"
+    },
+    {
+      "repl": ">Autotrack",
+      "ace": ">Autolock"
+    },
+    {
+      "repl": "lock r",
+      "ace": "launch r"
+    },
+    {
+      "repl": "track r",
+      "ace": "lock r"
+    }
+  ]
+}
+"""
+
 
 @app.callback(invoke_without_command=True)
 def callback(
@@ -36,7 +80,7 @@ def callback(
     So, with large translation tables the performance will obviously degrade with a power of two.
     The latter should be taken as a hint to maintain both language files in separate entities not as a patch task.
 
-    The translation table is an array of two element arrays provided as JSON and thus shall be in a shape like:
+    The translation table is either an array of two element arrays provided as JSON and thus shall be in a shape like:
 
     \b
       [
@@ -44,11 +88,30 @@ def callback(
         ["als", "othis"]
       ]
 
+    Or the table is given as an object providing more detailed instructions constraining the translation rules like:
+
+    \b
+    * contra indicators - when given exempting a line from translation
+    * pro indicators - when given marking a line for translation
+    * flip_flop indicators - providing either stop-start (default) or start-stop state switching
+
+    The JSON object format is best understood when executing the template command and adapting the resulting JSON
+    object written to standard out.
+
     Default for input source is standard in and out per default is sent to standard out.
     """
     if version:
         typer.echo(f'{APP_NAME} version {afasi.__version__}')
         raise typer.Exit()
+
+
+@app.command('template')
+def app_template() -> int:
+    """
+    Write a template of a translation table JSON structure to standard out and exit
+    """
+    sys.stdout.write(TEMPLATE_EXAMPLE)
+    return sys.exit(0)
 
 
 @app.command('translate')

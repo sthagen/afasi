@@ -16,6 +16,12 @@ def test_app_version():
     assert afasi.__version__ in result.stdout
 
 
+def test_app_template():
+    result = runner.invoke(app, ['template'])
+    assert result.exit_code == 0
+    assert result.stdout == cli.TEMPLATE_EXAMPLE
+
+
 def test_app_translate():
     result = runner.invoke(app, ['translate'])
     assert result.exit_code == 1

@@ -6,8 +6,11 @@ import json
 import os
 import pathlib
 import sys
+import typing
 from json.decoder import JSONDecodeError
 from typing import Iterator, List, Optional, Tuple, Union
+
+import afasi.tabel as tb
 
 DEBUG_VAR = 'AFASI_DEBUG'
 DEBUG = os.getenv(DEBUG_VAR)
@@ -106,6 +109,23 @@ def verify_request(argv: Optional[List[str]]) -> Tuple[int, str, List[str]]:
     return 0, '', argv
 
 
+@typing.no_type_check
+def speculative_table_loader(path: pathlib.Path):
+    """Try loading table data as pod or as object."""
+    try:
+        return True, load_translation_table(path)
+    except ValueError:
+        pass
+
+    try:
+        return False, tb.load_table(path)
+    except IsADirectoryError:
+        pass
+
+    print('neither plain old parallel array nor object table data given', file=sys.stderr)
+    return True, (tuple(),)
+
+
 def main(argv: Union[List[str], None] = None) -> int:
     """Drive the translation."""
     error, message, strings = verify_request(argv)
@@ -115,10 +135,8 @@ def main(argv: Union[List[str], None] = None) -> int:
 
     command, inp, out, translation_table_path, dryrun = strings
 
-    try:
-        trans = load_translation_table(pathlib.Path(translation_table_path))
-    except ValueError as err:
-        print(err, file=sys.stderr)
+    is_pod, meta = speculative_table_loader(pathlib.Path(translation_table_path))
+    if is_pod and not meta[0]:
         return 1
 
     source = sys.stdin if not inp else reader(inp)
@@ -130,11 +148,17 @@ def main(argv: Union[List[str], None] = None) -> int:
         print(f'  - input from:       {inp_disp}', file=sys.stderr)
         print(f'  - output to:        {out_disp}', file=sys.stderr)
         print(f'  - translation from: "{translation_table_path}"', file=sys.stderr)
-        print('\n'.join(report_request(trans)), end='', file=sys.stderr)
+        if is_pod:
+            print('\n'.join(report_request(meta)), end='', file=sys.stderr)
+        else:
+            print('*', meta, end='', file=sys.stderr)
         src, tgt = [], []
         for line in source:
             src.append(line)
-            tgt.append(replace(trans, line))
+            if is_pod:
+                tgt.append(replace(meta, line))
+            else:
+                tgt.append(meta.translate(line))
         print('* diff of source to target:')
         print(''.join(line for line in difflib.unified_diff(src, tgt, fromfile='SOURCE', tofile='TARGET')).strip())
         print('# ---')
@@ -142,9 +166,15 @@ def main(argv: Union[List[str], None] = None) -> int:
         if out:
             with open(pathlib.Path(out), 'wt', encoding=ENCODING) as target:
                 for line in source:
-                    target.write(replace(trans, line))
+                    if is_pod:
+                        target.write(replace(meta, line))
+                    else:
+                        target.write(meta.translate(line))
         else:
             for line in source:
-                sys.stdout.write(replace(trans, line))
+                if is_pod:
+                    sys.stdout.write(replace(meta, line))
+                else:
+                    sys.stdout.write(meta.translate(line))
 
     return 0

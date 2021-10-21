@@ -42,10 +42,10 @@ class Table:
                         self.ff_state = True if pos % 2 else False
 
         if self.ff_state:
-            if any(stop in text for stop in self.contra):
+            if self.contra and any(stop in text for stop in self.contra):
                 return text
 
-            if any(start in text for start in self.pro):
+            if not self.pro or any(start in text for start in self.pro):
                 for rule in self.translations:
                     text = rule.apply(text)
 
