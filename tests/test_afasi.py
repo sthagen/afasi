@@ -9,7 +9,7 @@ import afasi.afasi as af
 
 DIFF_FOR_MINIMAL = """\
 --- tests/fixtures/basic/minimal-in.xml
-+++ tests/fixtures/basic/minimal-out.xml
++++ minimal-out.xml
 @@ -6,12 +6,12 @@
          <message id="SOME_TRACK">
              <source>Some Track</source>
@@ -108,9 +108,10 @@ def test_main_translate_minimal_for_real_stdout(capsys):
     assert captured.err == ''
 
 
-def test_main_translate_minimal_for_real_to_file(capsys):
+def test_main_translate_minimal_for_real_to_file(capsys, tmp_path):
     inp = 'tests/fixtures/basic/minimal-in.xml'
-    out = 'tests/fixtures/basic/minimal-out.xml'
+    out_fake = 'minimal-out.xml'
+    out = tmp_path / out_fake
     tab = 'tests/fixtures/basic/minimal.json'
     af.main(['translate', inp, out, tab, '']) == 0
     captured = capsys.readouterr()
@@ -125,12 +126,12 @@ def test_main_translate_minimal_for_real_to_file(capsys):
     with open(out, 'rt', encoding=af.ENCODING) as handle:
         tgt = handle.readlines()
 
-    assert DIFF_FOR_MINIMAL == ''.join(line for line in difflib.unified_diff(src, tgt, fromfile=inp, tofile=out))
+    assert DIFF_FOR_MINIMAL == ''.join(line for line in difflib.unified_diff(src, tgt, fromfile=inp, tofile=out_fake))
 
 
-def test_main_translate_minimal_dryrun_for_real_to_file(capsys):
+def test_main_translate_minimal_dryrun_for_real_to_file(capsys, tmp_path):
     inp = 'tests/fixtures/basic/minimal-in.xml'
-    out = 'tests/fixtures/basic/minimal-out-dryrun-will-not-be-created.xml'
+    out = tmp_path / 'minimal-out-dryrun-will-not-be-created.xml'
     tab = 'tests/fixtures/basic/minimal.json'
     messages = (
         "  1. '>Rock' -> '>Lounge'",
