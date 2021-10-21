@@ -3,6 +3,15 @@
 ## v2021.10.22
 
 * Resolved feedback from friendly users
+* Added new command `template` to ease use of augmented translation table syntax
+* Simplified internal operation and reduced warning noise
+* Documented new features and data structures
+* Outer test line coverage again complete
+* New: Contra indicators - when given exempting a line from translation
+* New: Pro indicators - when given marking a line for translation
+* New: Flip-Flop indicators - providing either stop-start (default) or start-stop state switching
+* Refactored tests to use pytest tmp_path fixture to stabilize the tests
+* Removed prototype data and tests from table implemenbtation
 
 ## v2021.10.21
 
