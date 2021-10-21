@@ -3,6 +3,7 @@
 <!-- MarkdownTOC -->
 
 - `afasi`
+  - `afasi template`
   - `afasi translate`
   - `afasi version`
 
@@ -16,7 +17,7 @@ The translation table entries are applied in order per line of input.
 So, with large translation tables the performance will obviously degrade with a power of two.
 The latter should be taken as a hint to maintain both language files in separate entities not as a patch task.
 
-The translation table is an array or two element arrays provided as JSON and thus shall be in a shape like:
+The translation table is either an array of two element arrays provided as JSON and thus shall be in a shape like:
 
 ```json
   [
@@ -24,6 +25,15 @@ The translation table is an array or two element arrays provided as JSON and thu
     ["als", "othis"]
   ]
 ```
+
+Or the table is given as an object providing more detailed instructions constraining the translation rules like:
+
+* contra indicators - when given exempting a line from translation
+* pro indicators - when given marking a line for translation
+* flip_flop indicators - providing either stop-start (default) or start-stop state switching
+
+The JSON object format is best understood when executing the template command and adapting the resulting JSON
+object written to standard out.
 
 Default for input source is standard in and out per default is sent to standard out.
 
@@ -40,8 +50,23 @@ $ afasi [OPTIONS] COMMAND [ARGS]...
 
 **Commands**:
 
+* `template`: Write a template of a translation table JSON...
 * `translate`: Translate from a language to a 'langauge'.
 * `version`: Display the afasi version and exit
+
+### `afasi template`
+
+Write a template of a translation table JSON structure to standard out and exit
+
+**Usage**:
+
+```console
+$ afasi template [OPTIONS]
+```
+
+**Options**:
+
+* `-h, --help`: Show this message and exit.
 
 ### `afasi translate`
 
@@ -80,3 +105,4 @@ $ afasi version [OPTIONS]
 **Options**:
 
 * `-h, --help`: Show this message and exit.
+

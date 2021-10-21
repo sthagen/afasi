@@ -12,7 +12,7 @@ Fuzz a language by mixing up only few words.
 
 ## Status
 
-Experimental.
+Beta.
 
 **Note**: The default branch is `default`.
 
@@ -26,9 +26,10 @@ Experimental.
   - Translate Help
   - Translate Dryrun
   - Translate
-  - Example Translation Table
+  - Example Translation Tables
 - Command Line API
 - `afasi`
+  - `afasi template`
   - `afasi translate`
   - `afasi version`
 
@@ -40,7 +41,7 @@ Experimental.
 
 ```console
 $ afasi version
-Fuzz a language by mixing up only few words. version 2021.10.21
+Fuzz a language by mixing up only few words. version 2021.10.22
 ```
 
 ### General Help
@@ -52,26 +53,37 @@ Usage: afasi [OPTIONS] COMMAND [ARGS]...
   Fuzz a language by mixing up only few words.
 
   The translation table entries are applied in order per line of input. So,
-  with large translation tables the performance will obviously degrade with
-  a power of two. The latter should be taken as a hint to maintain both
-  language files in separate entities not as a patch task.
+  with large translation tables the performance will obviously degrade with a
+  power of two. The latter should be taken as a hint to maintain both language
+  files in separate entities not as a patch task.
 
-  The translation table is an array or two element arrays provided as JSON
-  and thus shall be in a shape like:
+  The translation table is either an array of two element arrays provided as
+  JSON and thus shall be in a shape like:
 
     [
       ["repl", "ace"],
       ["als", "othis"]
     ]
 
+  Or the table is given as an object providing more detailed instructions
+  constraining the translation rules like:
+
+  * contra indicators - when given exempting a line from translation
+  * pro indicators - when given marking a line for translation
+  * flip_flop indicators - providing either stop-start (default) or start-stop state switching
+
+  The JSON object format is best understood when executing the template
+  command and adapting the resulting JSON object written to standard out.
+
   Default for input source is standard in and out per default is sent to
   standard out.
 
 Options:
-  -V, --version  Display the afasi version and exit  [default: False]
+  -V, --version  Display the afasi version and exit
   -h, --help     Show this message and exit.
 
 Commands:
+  template   Write a template of a translation table JSON structure to...
   translate  Translate from a language to a 'langauge'.
   version    Display the afasi version and exit
 ```
@@ -90,20 +102,16 @@ Arguments:
 
 Options:
   -i, --input <sourcepath>        Path to input file (default is reading from
-                                  standard in)  [default: ]
-
+                                  standard in)
   -o, --output <targetpath>       Path to non-existing output file (default is
-                                  writing to standard out)  [default: ]
-
+                                  writing to standard out)
   -t, --table <translation table path>
                                   Path to translation table file in JSON
                                   format. Structure of table data is [["repl",
-                                  "ace"], ["als", "othis"]]  [default: ]
-
+                                  "ace"], ["als", "othis"]]
   -n, --dryrun                    Flag to execute without writing the
                                   translation but a diff instead (default is
-                                  False)  [default: False]
-
+                                  False)
   -h, --help                      Show this message and exit.
 ```
 
@@ -165,7 +173,9 @@ $ afasi % diff -u minimal-*.xml
  </TS>
 ```
 
-### Example Translation Table
+### Example Translation Tables
+
+Simple version (parallel arrays):
 
 ```json
 [
@@ -174,11 +184,58 @@ $ afasi % diff -u minimal-*.xml
 ]
 ```
 
+Augmented version (object):
+
+```json
+{
+  "table": {
+    "description": "table level default constraints, row attributes do replace those if present.",
+    "contra": [
+      "extracomment",
+      "source"
+    ],
+    "count": 0,
+    "flip_is_stop": true,
+    "flip_flop": [
+      "<message id=\"SOME_TRACK\">",
+      "</message>"
+    ],
+    "pro": [
+      "translation"
+    ]
+  },
+  "foo": "bar",
+  "translations": [
+    {
+      "repl": ">Lock",
+      "ace": ">Launch"
+    },
+    {
+      "repl": ">Track",
+      "ace": ">Lock"
+    },
+    {
+      "repl": ">Autotrack",
+      "ace": ">Autolock"
+    },
+    {
+      "repl": "lock r",
+      "ace": "launch r"
+    },
+    {
+      "repl": "track r",
+      "ace": "lock r"
+    }
+  ]
+}
+```
+
 # Command Line API
 
 <!-- MarkdownTOC -->
 
 - `afasi`
+  - `afasi template`
   - `afasi translate`
   - `afasi version`
 
@@ -192,7 +249,7 @@ The translation table entries are applied in order per line of input.
 So, with large translation tables the performance will obviously degrade with a power of two.
 The latter should be taken as a hint to maintain both language files in separate entities not as a patch task.
 
-The translation table is an array or two element arrays provided as JSON and thus shall be in a shape like:
+The translation table is either an array of two element arrays provided as JSON and thus shall be in a shape like:
 
 ```json
   [
@@ -200,6 +257,15 @@ The translation table is an array or two element arrays provided as JSON and thu
     ["als", "othis"]
   ]
 ```
+
+Or the table is given as an object providing more detailed instructions constraining the translation rules like:
+
+* contra indicators - when given exempting a line from translation
+* pro indicators - when given marking a line for translation
+* flip_flop indicators - providing either stop-start (default) or start-stop state switching
+
+The JSON object format is best understood when executing the template command and adapting the resulting JSON
+object written to standard out.
 
 Default for input source is standard in and out per default is sent to standard out.
 
@@ -216,8 +282,23 @@ $ afasi [OPTIONS] COMMAND [ARGS]...
 
 **Commands**:
 
+* `template`: Write a template of a translation table JSON...
 * `translate`: Translate from a language to a 'langauge'.
 * `version`: Display the afasi version and exit
+
+### `afasi template`
+
+Write a template of a translation table JSON structure to standard out and exit
+
+**Usage**:
+
+```console
+$ afasi template [OPTIONS]
+```
+
+**Options**:
+
+* `-h, --help`: Show this message and exit.
 
 ### `afasi translate`
 
@@ -256,4 +337,3 @@ $ afasi version [OPTIONS]
 **Options**:
 
 * `-h, --help`: Show this message and exit.
-
