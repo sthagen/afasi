@@ -54,12 +54,14 @@ def test_translation_init_from_dict():
     translation = tb.Translation(**data)
     assert translation.repl == data['repl']
     assert translation.ace == data['ace']
+    assert str(translation).strip() == "self.repl='>Autotrack' -> self.ace='>Autolock'"
 
 
 def test_table_init_from_json_string():
     table = tb.Table(**json.loads(TABLE_DATA))
     assert table.flip_is_stop is True
     assert table.pro == ['translation']
+    assert "self.repl='>Autotrack' -> self.ace='>Autolock'" in str(table)
 
 
 def test_table_init_from_json_file(tmp_path):
@@ -67,7 +69,6 @@ def test_table_init_from_json_file(tmp_path):
     d.mkdir()
     p = d / "tr.json"
     p.write_text(TABLE_DATA)
-    with open(p, 'rt', encoding=tb.ENCODING) as dump:
-        table = tb.Table(**json.load(dump))
+    table = tb.load_table(p)
     assert table.flip_is_stop is True
     assert table.pro == ['translation']
