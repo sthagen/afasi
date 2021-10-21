@@ -77,9 +77,17 @@ def test_table_init_from_json_file(tmp_path):
 def test_translate_apply_once():
     data = {'repl': '>Autotrack', 'ace': '>Autolock'}
     translation = tb.Translation(**data)
-    assert translation.apply('>Autotrack') == '>Autolock'
+    assert translation.apply('<translation>Autotrack') == '<translation>Autolock'
 
 
 def test_table_translate_once():
     table = tb.Table(**json.loads(TABLE_DATA))
-    assert table.translate('>Autotrack') == '>Autolock'
+    assert table.translate('<translation>Autotrack') == '<translation>Autolock'
+
+
+def test_table_translate_twice_contra_once_pro_once_no():
+    table = tb.Table(**json.loads(TABLE_DATA))
+    assert table.translate('<source>Autotrack') == '<source>Autotrack'
+    assert table.translate('<extracomment>Autotrack') == '<extracomment>Autotrack'
+    assert table.translate('<translation>Autotrack') == '<translation>Autolock'
+    assert table.translate('<noitalsnart>Autotrack') == '<noitalsnart>Autotrack'

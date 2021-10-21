@@ -30,8 +30,13 @@ class Table:
     @typing.no_type_check
     def translate(self, text: str) -> str:
         """Sequenced replacer (WIP)."""
-        for rule in self.translations:
-            text = rule.apply(text)
+        if any(stop in text for stop in self.contra):
+            return text
+
+        if any(start in text for start in self.pro):
+            for rule in self.translations:
+                text = rule.apply(text)
+
         return text
 
     @typing.no_type_check
