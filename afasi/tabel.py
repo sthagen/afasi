@@ -31,7 +31,7 @@ class Table:
     def translate(self, text: str) -> str:
         """Sequenced replacer (WIP)."""
         for rule in self.translations:
-            text = text.replace(rule.repl, rule.ace)
+            text = rule.apply(text)
         return text
 
     @typing.no_type_check
@@ -60,6 +60,11 @@ class Translation:
         """Instance created from dictionary."""
         for key, value in kwargs.items():
             setattr(self, key, value)
+
+    @typing.no_type_check
+    def apply(self, text: str) -> str:
+        """Elementary replacer (WIP)."""
+        return text.replace(self.repl, self.ace)
 
     @typing.no_type_check
     def __str__(self):
