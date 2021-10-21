@@ -1,5 +1,5 @@
 {
-  "_meta": {
+  "table": {
     "description": "table level default constraints, row attributes do replace those if present.",
     "contra": [
       "extracomment",
@@ -10,7 +10,7 @@
       "translation"
     ]
   },
-  "table": [
+  "translations": [
     {
       "repl": ">Lock",
       "ace": ">Launch"
