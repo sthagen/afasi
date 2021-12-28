@@ -1,5 +1,9 @@
 # Changelog
 
+## v2021.10.28
+
+* Happy linter, happy winter
+
 ## v2021.10.22
 
 * Resolved feedback from friendly users
