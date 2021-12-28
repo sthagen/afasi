@@ -18,7 +18,7 @@
 
 ```console
 $ afasi version
-Fuzz a language by mixing up only few words. version 2021.10.22
+Fuzz a language by mixing up only few words. version 2021.10.28
 ```
 
 ### General Help
