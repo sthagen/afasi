@@ -119,9 +119,9 @@ def test_table_init_from_json_string():
 
 
 def test_table_init_from_json_file(tmp_path):
-    d = tmp_path / "sub"
+    d = tmp_path / 'sub'
     d.mkdir()
-    p = d / "tr.json"
+    p = d / 'tr.json'
     p.write_text(TABLE_DATA)
     table = tb.load_table(p)
     assert table.flip_is_stop is True
