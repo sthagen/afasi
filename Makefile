@@ -12,7 +12,7 @@ install:
 install-all: install
 	pip install -r tests/requirements-dev.txt
 
-.PHONY: isort
+.PHONY: format
 format:
 	$(isort)
 	$(black)
@@ -35,7 +35,7 @@ mypy:
 
 .PHONY: test
 test: clean
-	pytest --cov=afasi --log-format="%(levelname)s %(message)s"
+	pytest --asyncio-mode=strict --cov=afasi --log-format="%(levelname)s %(message)s"
 
 .PHONY: testcov
 testcov: test
