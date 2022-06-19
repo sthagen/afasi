@@ -133,3 +133,4 @@ dmypy.json
 .idea
 local_publi.sh
 tests/fixtures/basic/minimal-out.xml
+local_*
