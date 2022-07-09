@@ -1,16 +1,16 @@
 .DEFAULT_GOAL := all
-isort = isort afasi tests
-black = black -S -l 120 --target-version py39 afasi tests
+isort = isort afasi test
+black = black -S -l 120 --target-version py39 afasi test
 
 .PHONY: install
 install:
 	pip install -U pip wheel
-	pip install -r tests/requirements.txt
+	pip install -r test/requirements.txt
 	pip install -U .
 
 .PHONY: install-all
 install-all: install
-	pip install -r tests/requirements-dev.txt
+	pip install -r test/requirements-dev.txt
 
 .PHONY: format
 format:
@@ -19,13 +19,13 @@ format:
 
 .PHONY: init
 init:
-	pip install -r tests/requirements.txt
-	pip install -r tests/requirements-dev.txt
+	pip install -r test/requirements.txt
+	pip install -r test/requirements-dev.txt
 
 .PHONY: lint
 lint:
 	python setup.py check -ms
-	flake8 afasi/ tests/
+	flake8 afasi/ test/
 	$(isort) --check-only --df
 	$(black) --check --diff
 
@@ -58,6 +58,6 @@ clean:
 	@rm -f .coverage.*
 	@rm -rf build
 	@rm -f afasi-report.*
-	@rm -f tests/fixtures/basic/minimal-out.xml
+	@rm -f test/fixtures/basic/minimal-out.xml
 	python setup.py clean
 
