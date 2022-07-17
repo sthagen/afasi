@@ -60,4 +60,3 @@ clean:
 	@rm -f afasi-report.*
 	@rm -f test/fixtures/basic/minimal-out.xml
 	python setup.py clean
-
