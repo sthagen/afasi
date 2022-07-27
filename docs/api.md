@@ -1,14 +1,5 @@
 # Command Line API
 
-<!-- MarkdownTOC -->
-
-- `afasi`
-  - `afasi template`
-  - `afasi translate`
-  - `afasi version`
-
-<!-- /MarkdownTOC -->
-
 ## `afasi`
 
 Fuzz a language by mixing up only few words.

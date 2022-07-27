@@ -1,17 +1,4 @@
-# Use
-
-<!-- MarkdownTOC -->
-
-- Examples
-  - Version
-  - General Help
-  - Translate Help
-  - Translate Dryrun
-  - Translate
-  - Example Translation Tables
-
-<!-- /MarkdownTOC -->
-
+# Usage
 ## Examples
 
 ### Version
