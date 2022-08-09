@@ -12,7 +12,7 @@ Fuzz a language by mixing up only few words.
 
 ## Bug Tracker
 
-Feature requests and bug reports are bested entered in the [todos of afasi](https://todo.sr.ht/~sthagen/afasi).
+Feature requests and bug reports are best entered in the [todos of afasi](https://todo.sr.ht/~sthagen/afasi).
 
 ## Primary Source repository
 
