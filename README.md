@@ -16,7 +16,7 @@ User and developer [documentation of afasi](https://codes.dilettant.life/docs/af
 
 ## Bug Tracker
 
-Feature requests and bug reports are bested entered in the [todos of afasi](https://todo.sr.ht/~sthagen/afasi).
+Feature requests and bug reports are best entered in the [todos of afasi](https://todo.sr.ht/~sthagen/afasi).
 
 ## Primary Source repository
 
