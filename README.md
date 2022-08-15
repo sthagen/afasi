@@ -24,8 +24,8 @@ The primary source repository of afasi is somewhere in the mountains in Central 
 This is git, so any clone can become the source to everyone's benefit, no central only code.
 Anyway, the preferred outlets are:
 
-* [afasi on codeberg](https://codeberg.org/sthagen/afasi) a collaboration platform and git hosting for free and open source software, content and projects.
-* [afasi at sourcehut](https://git.sr.ht/~sthagen/afasi) a collection of tools useful for software development.
+* [afasi on codeberg](https://codeberg.org/sthagen/afasi) - a collaboration platform and git hosting for free and open source software, content and projects.
+* [afasi at sourcehut](https://git.sr.ht/~sthagen/afasi) - a collection of tools useful for software development.
 
 ## Status
 
