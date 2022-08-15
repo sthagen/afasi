@@ -20,8 +20,8 @@ Feature requests and bug reports are best entered in the [todos of afasi](https:
 
 ## Primary Source repository
 
-The primary source repository of afasi is somewhere in the mountains in Central Switzerland.
-This is git, so any clone can become the source to everyone's benefit, no central only code.
+The primary source repository of afasi is somewhere on a mountain in Central Switzerland.
+But, we use decentralized version control (git), so any clone can become the source to everyone's benefit, no central only code.
 Anyway, the preferred outlets are:
 
 * [afasi on codeberg](https://codeberg.org/sthagen/afasi) - a collaboration platform and git hosting for free and open source software, content and projects.
