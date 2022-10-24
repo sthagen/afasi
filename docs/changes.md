@@ -2,7 +2,7 @@
 
 ## 2022.10.24
 
-* Migrated to pyproject.toml for packaging
+* Migrated to pyproject.toml for packaging and logging for, well, logging
 
 ## 2021.10.28
 
