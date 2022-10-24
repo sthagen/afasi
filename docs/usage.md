@@ -51,11 +51,7 @@ Fuzz a language by mixing up only few words. version 2022.10.24+parent.a72a019a
 ### Translate Help
 
 ```console
-❯ afasi version
-Fuzz a language by mixing up only few words. version 2022.10.24+parent.a72a019a
-(afasi-3-10-7)
-afasi on  default [!?] is 📦 v2022.10.24 via  v16.14.2 via 🐍 v3.10.7 (afasi-3-10-7)
-❯ python -m afasi translate -h
+❯ afasi translate -h
 
  Usage: afasi translate [OPTIONS] [SOURCE] [TARGET]
 
