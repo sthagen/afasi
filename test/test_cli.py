@@ -25,10 +25,3 @@ def test_app_template():
 def test_app_translate():
     result = runner.invoke(app, ['translate'])
     assert result.exit_code == 1
-
-
-def test_cli_main(capsys):
-    message = 'received wrong number of arguments'
-    cli.main(['translate', 'no_file_there']) == 1
-    captured = capsys.readouterr()
-    assert message in captured.err
