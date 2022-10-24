@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=missing-docstring,unused-import,reimported
 import difflib
+import logging
 import pathlib
 
 import pytest
@@ -28,57 +29,57 @@ DIFF_FOR_MINIMAL = """\
 """
 
 
-def test_main_empty(capsys):
+def test_main_empty(caplog):
     message = 'received wrong number of arguments'
-    af.main([]) == 2
-    captured = capsys.readouterr()
-    assert message in captured.err
+    assert af.main([]) == 2
+    text = caplog.text
+    assert message in text
 
 
-def test_main_unknown_command(capsys):
+def test_main_unknown_command(caplog):
     message = 'received unknown command'
-    af.main(['fabulate', '', '', '', 'DRYRUN']) == 2
-    captured = capsys.readouterr()
-    assert message in captured.err
+    assert af.main(['fabulate', '', '', '', 'DRYRUN']) == 2
+    text = caplog.text
+    assert message in text
 
 
-def test_main_source_is_no_file(capsys):
+def test_main_source_is_no_file(caplog):
     message = 'source is no file'
-    af.main(['translate', 'test/', '', '', 'DRYRUN']) == 2
-    captured = capsys.readouterr()
-    assert message in captured.err
+    assert af.main(['translate', 'test/', '', '', 'DRYRUN']) == 1
+    text = caplog.text
+    assert message in text
 
 
-def test_main_target_file_exists(capsys):
+def test_main_target_file_exists(caplog):
     message = 'target file exists'
     inp = 'test/fixtures/basic/language.xml'
-    af.main(['translate', inp, 'test/fixtures/basic/existing_file.xml', '', 'DRYRUN']) == 2
-    captured = capsys.readouterr()
-    assert message in captured.err
+    assert af.main(['translate', inp, 'test/fixtures/basic/existing_file.xml', '', 'DRYRUN']) == 1
+    text = caplog.text
+    assert message in text
 
 
-def test_main_target_file_does_not_exist_no_table_path(capsys):
+def test_main_target_file_does_not_exist_no_table_path(caplog):
     message = 'neither plain old parallel array nor object table data given'
     inp = 'test/fixtures/basic/language.xml'
-    af.main(['translate', inp, 'test/fixtures/basic/non_existing_file.xml', '', 'DRYRUN']) == 1
-    captured = capsys.readouterr()
-    assert message in captured.err
+    assert af.main(['translate', inp, 'test/fixtures/basic/non_existing_file.xml', '', 'DRYRUN']) == 1
+    text = caplog.text
+    assert message in text
 
 
 def test_main_translate_dryrun_only():
     inp = 'test/fixtures/basic/language.xml'
-    af.main(['translate', inp, '', 'test/fixtures/basic/fuzz.json', 'DRYRUN']) == 0
+    assert af.main(['translate', inp, '', 'test/fixtures/basic/fuzz.json', 'DRYRUN']) == 0
 
 
 def test_main_translate_augmented_dryrun_only():
     inp = 'test/fixtures/basic/language.xml'
-    af.main(['translate', inp, '', 'test/fixtures/basic/translation.json', 'DRYRUN']) == 0
+    assert af.main(['translate', inp, '', 'test/fixtures/basic/translation.json', 'DRYRUN']) == 0
 
 
 def test_main_translate_for_real():
     inp = 'test/fixtures/basic/language.xml'
     tab = 'test/fixtures/basic/fuzz.json'
-    af.main(['translate', inp, '', tab, '']) == 0
+    assert af.main(['translate', inp, '', tab, '']) == 0
 
 
 def test_load_translation_table_empty_path_string():
@@ -108,7 +109,7 @@ def test_load_translation_table_with_non_pairs():
 def test_main_translate_minimal_for_real_stdout(capsys):
     inp = 'test/fixtures/basic/minimal-in.xml'
     tab = 'test/fixtures/basic/minimal.json'
-    af.main(['translate', inp, '', tab, '']) == 0
+    assert af.main(['translate', inp, '', tab, '']) == 0
     captured = capsys.readouterr()
     assert captured.err == ''
 
@@ -116,7 +117,7 @@ def test_main_translate_minimal_for_real_stdout(capsys):
 def test_main_translate_augmented_for_real_stdout(capsys):
     inp = 'test/fixtures/basic/language.xml'
     tab = 'test/fixtures/basic/translation.json'
-    af.main(['translate', inp, '', tab, '']) == 0
+    assert af.main(['translate', inp, '', tab, '']) == 0
     captured = capsys.readouterr()
     assert captured.err == ''
 
@@ -126,7 +127,7 @@ def test_main_translate_augmented_for_real_to_file_no_diff(capsys, tmp_path):
     out_fake = 'language-out.xml'
     out = tmp_path / out_fake
     tab = 'test/fixtures/basic/translation.json'
-    af.main(['translate', inp, out, tab, '']) == 0
+    assert af.main(['translate', inp, out, tab, '']) == 0
     captured = capsys.readouterr()
     assert captured.err == ''
     assert pathlib.Path(out).is_file()
@@ -137,7 +138,7 @@ def test_main_translate_minimal_for_real_to_file(capsys, tmp_path):
     out_fake = 'minimal-out.xml'
     out = tmp_path / out_fake
     tab = 'test/fixtures/basic/minimal.json'
-    af.main(['translate', inp, out, tab, '']) == 0
+    assert af.main(['translate', inp, out, tab, '']) == 0
     captured = capsys.readouterr()
     assert captured.err == ''
     assert pathlib.Path(out).is_file()
@@ -153,7 +154,8 @@ def test_main_translate_minimal_for_real_to_file(capsys, tmp_path):
     assert DIFF_FOR_MINIMAL == ''.join(line for line in difflib.unified_diff(src, tgt, fromfile=inp, tofile=out_fake))
 
 
-def test_main_translate_minimal_dryrun_for_real_to_file(capsys, tmp_path):
+def test_main_translate_minimal_dryrun_for_real_to_file(caplog, tmp_path):
+    logging.root.setLevel(logging.INFO)
     inp = 'test/fixtures/basic/minimal-in.xml'
     out = tmp_path / 'minimal-out-dryrun-will-not-be-created.xml'
     tab = 'test/fixtures/basic/minimal.json'
@@ -161,8 +163,8 @@ def test_main_translate_minimal_dryrun_for_real_to_file(capsys, tmp_path):
         "  1. '>Rock' -> '>Lounge'",
         "  2. '>Track' -> '>Rock'",
     )
-    af.main(['translate', inp, out, tab, 'DRYRUN']) == 0
-    captured = capsys.readouterr()
+    assert af.main(['translate', inp, out, tab, 'DRYRUN']) == 0
+    text = caplog.text
     for message in messages:
-        assert message in captured.err
+        assert message in text
     assert pathlib.Path(out).is_file() is False
