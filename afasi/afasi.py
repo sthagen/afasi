@@ -3,7 +3,6 @@
 """Fuzz a language by mixing up only few words. API."""
 import difflib
 import json
-import os
 import pathlib
 import sys
 import typing
@@ -11,12 +10,7 @@ from json.decoder import JSONDecodeError
 from typing import Iterator, List, Optional, Tuple, Union
 
 import afasi.tabel as tb
-
-DEBUG_VAR = 'AFASI_DEBUG'
-DEBUG = os.getenv(DEBUG_VAR)
-
-ENCODING = 'utf-8'
-ENCODING_ERRORS_POLICY = 'ignore'
+from afasi import ENCODING, log
 
 STDIN, STDOUT = 'STDIN', 'STDOUT'
 DISPATCH = {
@@ -95,7 +89,7 @@ def verify_request(argv: Optional[List[str]]) -> Tuple[int, str, List[str]]:
 
     command, inp, out, translation_table_path, dryrun = argv
 
-    if command not in ('translate'):
+    if command not in ('translate',):
         return 2, 'received unknown command', ['']
 
     if inp:
@@ -122,7 +116,7 @@ def speculative_table_loader(path: pathlib.Path):
     except IsADirectoryError:
         pass
 
-    print('neither plain old parallel array nor object table data given', file=sys.stderr)
+    log.warning('neither plain old parallel array nor object table data given')
     return True, (tuple(),)
 
 
@@ -130,7 +124,7 @@ def main(argv: Union[List[str], None] = None) -> int:
     """Drive the translation."""
     error, message, strings = verify_request(argv)
     if error:
-        print(message, file=sys.stderr)
+        log.error(message)
         return error
 
     command, inp, out, translation_table_path, dryrun = strings
@@ -141,17 +135,17 @@ def main(argv: Union[List[str], None] = None) -> int:
 
     source = sys.stdin if not inp else reader(inp)
     if dryrun:
-        print('dryrun requested\n# ---', file=sys.stderr)
-        print('* resources used:', file=sys.stderr)
+        log.info('dryrun requested\n# ---')
+        log.info('* resources used:')
         inp_disp = 'STDIN' if not inp else f'"{inp}"'
         out_disp = 'STDOUT' if not out else f'"{out}"'
-        print(f'  - input from:       {inp_disp}', file=sys.stderr)
-        print(f'  - output to:        {out_disp}', file=sys.stderr)
-        print(f'  - translation from: "{translation_table_path}"', file=sys.stderr)
+        log.info(f'  - input from:       {inp_disp}')
+        log.info(f'  - output to:        {out_disp}')
+        log.info(f'  - translation from: "{translation_table_path}"')
         if is_pod:
-            print('\n'.join(report_request(meta)), end='', file=sys.stderr)
+            log.info('\n'.join(report_request(meta)))
         else:
-            print('*', meta, end='', file=sys.stderr)
+            log.info(f'* {meta}')
         src, tgt = [], []
         for line in source:
             src.append(line)
@@ -159,9 +153,9 @@ def main(argv: Union[List[str], None] = None) -> int:
                 tgt.append(replace(meta, line))
             else:
                 tgt.append(meta.translate(line))
-        print('* diff of source to target:')
-        print(''.join(line for line in difflib.unified_diff(src, tgt, fromfile='SOURCE', tofile='TARGET')).strip())
-        print('# ---')
+        log.info('* diff of source to target:')
+        log.info(''.join(line for line in difflib.unified_diff(src, tgt, fromfile='SOURCE', tofile='TARGET')).strip())
+        log.info('# ---')
     else:
         if out:
             with open(pathlib.Path(out), 'wt', encoding=ENCODING) as target:
