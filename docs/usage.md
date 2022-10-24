@@ -79,7 +79,7 @@ Fuzz a language by mixing up only few words. version 2022.10.24+parent.a72a019a
 Using files from `test/fixtures/basic/`:
 
 ```console
-❯ python -m afasi translate minimal-in.xml --table minimal.json --dryrun
+❯ afasi translate minimal-in.xml --table minimal.json --dryrun
 2022-10-24T18:28:25.225303+00:00 INFO [AFASI]: dryrun requested
 # ---
 2022-10-24T18:28:25.226082+00:00 INFO [AFASI]: * resources used:
