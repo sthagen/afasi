@@ -1,10 +1,14 @@
 # Changelog
 
-## v2021.10.28
+## 2022.10.24
+
+* Migrated to pyproject.toml for packaging
+
+## 2021.10.28
 
 * Happy linter, happy winter
 
-## v2021.10.22
+## 2021.10.22
 
 * Resolved feedback from friendly users
 * Added new command `template` to ease use of augmented translation table syntax
@@ -17,12 +21,12 @@
 * Refactored tests to use pytest tmp_path fixture to stabilize the tests
 * Removed prototype data and tests from table implemenbtation
 
-## v2021.10.21
+## 2021.10.21
 
 * Resolved feedback from friendly users
 * Created initial documentation set covering API and examples of use
 * Fixed python version dependency to be consistently 3.8, 3.9, and 3.10
 
-## v2021.10.20
+## 2021.10.20
 
 * Initial release to pypi
