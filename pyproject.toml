@@ -46,7 +46,7 @@ universal = true
 [tool.black]
 line-length = 120
 skip-string-normalization = true
-target-version = ["py38", "py39", "py310"]
+target-version = ["py39", "py310", "py311"]
 
 [tool.coverage.run]
 branch = true
