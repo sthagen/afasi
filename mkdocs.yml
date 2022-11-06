@@ -3,6 +3,9 @@ site_description: Fuzz a language by mixing up only few words.
 
 theme:
   name: 'material'
+  features:
+    - navigation.expand
+    - toc.integrate
   palette:
     # Light mode
     - media: "(prefers-color-scheme: light)"
