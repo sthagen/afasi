@@ -26,8 +26,8 @@ or:
   - ace
 - - als
   - othis
-
 ```
+
 Or the table is given as an object providing more detailed instructions constraining the translation rules like:
 
 * contra indicators - when given exempting a line from translation

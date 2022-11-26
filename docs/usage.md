@@ -19,12 +19,19 @@ Fuzz a language by mixing up only few words. version 2022.10.24+parent.a72a019a
  The translation table entries are applied in order per line of input. So, with large translation tables the
  performance will obviously degrade with a power of two. The latter should be taken as a hint to maintain both
  language files in separate entities not as a patch task.
- The translation table is either an array of two element arrays provided as JSON and thus shall be in a shape
- like:
+ The translation table is either an array of two element arrays provided as YAML or JSON and thus shall be in a
+ shape like either:
    [
      ["repl", "ace"],
      ["als", "othis"]
    ]
+
+ or:
+ ---
+ - - repl
+   - ace
+ - - als
+   - othis
 
  Or the table is given as an object providing more detailed instructions constraining the translation rules
  like:
