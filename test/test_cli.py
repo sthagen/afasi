@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-# pylint: disable=missing-docstring,unused-import,reimported
 from typer.testing import CliRunner
 
 import afasi
