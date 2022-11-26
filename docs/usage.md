@@ -16,35 +16,35 @@ Fuzz a language by mixing up only few words. version 2022.10.24+parent.a72a019a
  Usage: afasi [OPTIONS] COMMAND [ARGS]...
 
  Fuzz a language by mixing up only few words.
- The translation table entries are applied in order per line of input. So, with large translation
- tables the performance will obviously degrade with a power of two. The latter should be taken as a
- hint to maintain both language files in separate entities not as a patch task.
- The translation table is either an array of two element arrays provided as JSON and thus shall be in a
- shape like:
+ The translation table entries are applied in order per line of input. So, with large translation tables the
+ performance will obviously degrade with a power of two. The latter should be taken as a hint to maintain both
+ language files in separate entities not as a patch task.
+ The translation table is either an array of two element arrays provided as JSON and thus shall be in a shape
+ like:
    [
      ["repl", "ace"],
      ["als", "othis"]
    ]
 
- Or the table is given as an object providing more detailed instructions constraining the translation
- rules like:
+ Or the table is given as an object providing more detailed instructions constraining the translation rules
+ like:
  * contra indicators - when given exempting a line from translation
  * pro indicators - when given marking a line for translation
  * flip_flop indicators - providing either stop-start (default) or start-stop state switching
 
- The JSON object format is best understood when executing the template command and adapting the
- resulting JSON object written to standard out.
+ The JSON object format is best understood when executing the template command and adapting the resulting JSON
+ object written to standard out.
  Default for input source is standard in and out per default is sent to standard out.
 
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --version  -V        Display the afasi version and exit                                              │
-│ --help     -h        Show this message and exit.                                                     │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────╮
-│ template     Write a template of a translation table JSON structure to standard out and exit         │
-│ translate    Translate from a language to a 'langauge'.                                              │
-│ version      Display the afasi version and exit                                                      │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --version  -V        Display the afasi version and exit                                                      │
+│ --help     -h        Show this message and exit.                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ template     Write a template of a translation table YAML or JSON structure to standard out and exit         │
+│ translate    Translate from a language to a 'langauge'.                                                      │
+│ version      Display the afasi version and exit                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 ```
 
@@ -57,20 +57,20 @@ Fuzz a language by mixing up only few words. version 2022.10.24+parent.a72a019a
 
  Translate from a language to a 'langauge'.
 
-╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────────╮
-│   source      [SOURCE]  [default: STDIN]                                                             │
-│   target      [TARGET]  [default: STDOUT]                                                            │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --input   -i      <sourcepath>              Path to input file (default is reading from standard in) │
-│ --output  -o      <targetpath>              Path to non-existing output file (default is writing to  │
-│                                             standard out)                                            │
-│ --table   -t      <translation table path>  Path to translation table file in JSON format. Structure │
-│                                             of table data is [["repl", "ace"], ["als", "othis"]]     │
-│ --dryrun  -n      bool                      Flag to execute without writing the translation but a    │
-│                                             diff instead (default is False)                          │
-│ --help    -h                                Show this message and exit.                              │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│   source      [SOURCE]  [default: STDIN]                                                                     │
+│   target      [TARGET]  [default: STDOUT]                                                                    │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --input   -i      <sourcepath>              Path to input file (default is reading from standard in)         │
+│ --output  -o      <targetpath>              Path to non-existing output file (default is writing to standard │
+│                                             out)                                                             │
+│ --table   -t      <translation table path>  Path to translation table file in YAML or JSON format. Structure │
+│                                             of table data is [["repl", "ace"], ["als", "othis"]]             │
+│ --dryrun  -n      bool                      Flag to execute without writing the translation but a diff       │
+│                                             instead (default is False)                                       │
+│ --help    -h                                Show this message and exit.                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 ```
 
@@ -145,8 +145,39 @@ Simple version (parallel arrays):
   [">Track", ">Rock"]
 ]
 ```
+Augmented version (object) in YAML format:
 
-Augmented version (object):
+```yaml
+---
+table:
+  description: table level default constraints, row attributes do replace those if
+    present.
+  contra:
+  - extracomment
+  - source
+  count: 0
+  flip_is_stop: true
+  flip_flop:
+  - <message id="SOME_TRACK">
+  - </message>
+  pro:
+  - translation
+foo: bar
+translations:
+- repl: ">Lock"
+  ace: ">Launch"
+- repl: ">Track"
+  ace: ">Lock"
+- repl: ">Autotrack"
+  ace: ">Autolock"
+- repl: lock r
+  ace: launch r
+- repl: track r
+  ace: lock r
+
+```
+
+Same augmented version (object) in JSON format:
 
 ```json
 {
