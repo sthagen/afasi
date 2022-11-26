@@ -3,6 +3,7 @@
 ## 2022.11.26
 
 * Added translation table processing for YAML (new default)
+* Reduced supported python versions to 3.10 and 3.11 (or higher)
 
 ## 2022.10.24
 
