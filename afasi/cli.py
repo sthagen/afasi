@@ -17,7 +17,7 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 
-TEMPLATE_EXAMPLE = """\
+TEMPLATE_EXAMPLE_JSON = """\
 {
   "table": {
     "description": "table level default constraints, row attributes do replace those if present.",
@@ -59,6 +59,35 @@ TEMPLATE_EXAMPLE = """\
     }
   ]
 }
+"""
+
+TEMPLATE_EXAMPLE_YAML = """\
+---
+table:
+  description: table level default constraints, row attributes do replace those if
+    present.
+  contra:
+  - extracomment
+  - source
+  count: 0
+  flip_is_stop: true
+  flip_flop:
+  - <message id="SOME_TRACK">
+  - </message>
+  pro:
+  - translation
+foo: bar
+translations:
+- repl: ">Lock"
+  ace: ">Launch"
+- repl: ">Track"
+  ace: ">Lock"
+- repl: ">Autotrack"
+  ace: ">Autolock"
+- repl: lock r
+  ace: launch r
+- repl: track r
+  ace: lock r
 """
 
 
@@ -105,11 +134,19 @@ def callback(
 
 
 @app.command('template')
-def app_template() -> int:
+def app_template(
+    template_format: str = typer.Option(
+        'yaml',
+        '-f',
+        '--format',
+        help='Format of template',
+        metavar='<translation-table>',
+    ),
+) -> int:
     """
-    Write a template of a translation table JSON structure to standard out and exit
+    Write a template of a translation table YAML or JSON structure to standard out and exit
     """
-    sys.stdout.write(TEMPLATE_EXAMPLE)
+    sys.stdout.write(TEMPLATE_EXAMPLE_JSON if template_format.lower() == 'json' else TEMPLATE_EXAMPLE_YAML)
     return sys.exit(0)
 
 
