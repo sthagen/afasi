@@ -19,7 +19,13 @@ def test_app_version():
 def test_app_template():
     result = runner.invoke(app, ['template'])
     assert result.exit_code == 0
-    assert result.stdout == cli.TEMPLATE_EXAMPLE
+    assert result.stdout == cli.TEMPLATE_EXAMPLE_YAML
+
+
+def test_app_template_json():
+    result = runner.invoke(app, ['template', '-f', 'jSoN'])
+    assert result.exit_code == 0
+    assert result.stdout == cli.TEMPLATE_EXAMPLE_JSON
 
 
 def test_app_translate():
