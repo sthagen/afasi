@@ -7,7 +7,7 @@ import pathlib
 import sys
 import typing
 from json.decoder import JSONDecodeError
-from typing import Iterator, List, Optional, Tuple, Union
+from typing import Iterator
 
 import afasi.tabel as tb
 from afasi import ENCODING, log
@@ -19,7 +19,7 @@ DISPATCH = {
 }
 
 
-def filter_table(pairs: List[Tuple[str, str]]) -> Tuple[Tuple[str, str], ...]:
+def filter_table(pairs: list[tuple[str, str]]) -> tuple[tuple[str, str], ...]:
     """Filter same -> same and redundant repl -> ace from redundant table of pairs."""
     table = []
     for repl, ace in pairs:
@@ -32,7 +32,7 @@ def filter_table(pairs: List[Tuple[str, str]]) -> Tuple[Tuple[str, str], ...]:
     return tuple(table)
 
 
-def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
+def load_translation_table(path: pathlib.Path) -> tuple[tuple[str, str], ...]:
     """Load the translation table into a tuple of unique non-idempotent pairs."""
     if not path:
         raise ValueError('translation table path not given')
@@ -55,7 +55,7 @@ def load_translation_table(path: pathlib.Path) -> Tuple[Tuple[str, str], ...]:
     return filter_table([(repl, ace) for repl, ace in table])
 
 
-def report_request(trans: Tuple[Tuple[str, str], ...]) -> List[str]:
+def report_request(trans: tuple[tuple[str, str], ...]) -> list[str]:
     """Generate report of request per list of lines."""
     report = ['* translations (in order):']
     repl_col_width = max(len(repl) for repl, _ in trans) + 1
@@ -68,7 +68,7 @@ def report_request(trans: Tuple[Tuple[str, str], ...]) -> List[str]:
     return report + ['']
 
 
-def replace(trans: Tuple[Tuple[str, str], ...], text: str) -> str:
+def replace(trans: tuple[tuple[str, str], ...], text: str) -> str:
     """Naive replacer."""
     for repl, ace in trans:
         text = text.replace(repl, ace)
@@ -82,7 +82,7 @@ def reader(path: str) -> Iterator[str]:
             yield line
 
 
-def verify_request(argv: Optional[List[str]]) -> Tuple[int, str, List[str]]:
+def verify_request(argv: list[str] | None) -> tuple[int, str, list[str]]:
     """Gail with grace."""
     if not argv or len(argv) != 5:
         return 2, 'received wrong number of arguments', ['']
@@ -120,7 +120,7 @@ def speculative_table_loader(path: pathlib.Path):
     return True, (tuple(),)
 
 
-def main(argv: Union[List[str], None] = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     """Drive the translation."""
     error, message, strings = verify_request(argv)
     if error:
