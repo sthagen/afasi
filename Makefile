@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := all
-black = black -S -l 120 --target-version py310 afasi test
+black = black -S -l 120 --target-version py311 afasi test
 flake8 = flake8 afasi test
 isort = isort afasi test
 pytest = pytest --asyncio-mode=strict --cov=afasi --cov-report term-missing:skip-covered --cov-branch --log-format="%(levelname)s %(message)s"

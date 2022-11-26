@@ -1,5 +1,9 @@
 # Changelog
 
+## 2022.11.26
+
+* Added translation table processing for YAML (new default)
+
 ## 2022.10.24
 
 * Migrated to pyproject.toml for packaging and logging for, well, logging
