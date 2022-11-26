@@ -5,6 +5,8 @@ import json
 import pathlib
 import typing
 
+import yaml
+
 ENCODING = 'utf-8'
 
 
@@ -90,6 +92,10 @@ class Translation:
 
 
 def load_table(path: pathlib.Path) -> typing.Any:
-    """Generate Table instance from JSON file."""
+    """Generate Table instance from YAML or JSON file."""
+    suffix = path.suffix.lower()
+    if suffix == '.json':
+        with open(path, 'rt', encoding=ENCODING) as dump:
+            return Table(**json.load(dump))
     with open(path, 'rt', encoding=ENCODING) as dump:
-        return Table(**json.load(dump))
+        return Table(**yaml.safe_load(dump))

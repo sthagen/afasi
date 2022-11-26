@@ -9,6 +9,8 @@ import typing
 from json.decoder import JSONDecodeError
 from typing import Iterator
 
+import yaml
+
 import afasi.tabel as tb
 from afasi import ENCODING, log
 
@@ -40,11 +42,21 @@ def load_translation_table(path: pathlib.Path) -> tuple[tuple[str, str], ...]:
     if not path.is_file():
         raise ValueError('translation table path must lead to a file')
 
-    with open(path, 'r', encoding=ENCODING) as handle:
-        try:
-            table = json.load(handle)
-        except JSONDecodeError:
-            raise ValueError('translation table path must lead to a JSON file')
+    suffix = path.suffix.lower()
+    if suffix not in ('.json', '.yaml', '.yml'):
+        raise ValueError('translation table path must have a .json, yaml, or .yml suffix')
+    elif suffix == '.json':
+        with open(path, 'r', encoding=ENCODING) as handle:
+            try:
+                table = json.load(handle)
+            except JSONDecodeError:
+                raise ValueError('translation table path must lead to a JSON file')
+    else:
+        with open(path, 'r', encoding=ENCODING) as handle:
+            try:
+                table = yaml.safe_load(handle)
+            except yaml.YAMLError:
+                raise ValueError('translation table path must lead to a YAML file')
 
     if not table:
         raise ValueError('translation table is empty')
@@ -113,7 +125,7 @@ def speculative_table_loader(path: pathlib.Path):
 
     try:
         return False, tb.load_table(path)
-    except IsADirectoryError:
+    except (IsADirectoryError, ValueError):
         pass
 
     log.warning('neither plain old parallel array nor object table data given')
