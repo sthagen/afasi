@@ -89,7 +89,7 @@ def test_load_translation_table_empty_path_string():
 
 
 def test_load_translation_table_wrong_file_format():
-    message = 'translation table path must lead to a JSON file'
+    message = 'translation table path must have a .json, yaml, or .yml suffix'
     with pytest.raises(ValueError, match=message):
         af.load_translation_table(pathlib.Path('test/fixtures/basic/fuzz.py'))
 

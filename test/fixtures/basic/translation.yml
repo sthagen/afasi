@@ -1,0 +1,26 @@
+---
+table:
+  description: table level default constraints, row attributes do replace those if
+    present.
+  contra:
+  - extracomment
+  - source
+  count: 0
+  flip_is_stop: true
+  flip_flop:
+  - <message id="SOME_TRACK">
+  - </message>
+  pro:
+  - translation
+foo: bar
+translations:
+- repl: ">Lock"
+  ace: ">Launch"
+- repl: ">Track"
+  ace: ">Lock"
+- repl: ">Autotrack"
+  ace: ">Autolock"
+- repl: lock r
+  ace: launch r
+- repl: track r
+  ace: lock r
