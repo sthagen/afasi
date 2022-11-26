@@ -108,13 +108,23 @@ def callback(
     So, with large translation tables the performance will obviously degrade with a power of two.
     The latter should be taken as a hint to maintain both language files in separate entities not as a patch task.
 
-    The translation table is either an array of two element arrays provided as JSON and thus shall be in a shape like:
+    The translation table is either an array of two element arrays provided as YAML or JSON and thus shall
+    be in a shape like either:
 
     \b
       [
         ["repl", "ace"],
         ["als", "othis"]
       ]
+
+    or:
+
+    \b
+    ---
+    - - repl
+      - ace
+    - - als
+      - othis
 
     Or the table is given as an object providing more detailed instructions constraining the translation rules like:
 
