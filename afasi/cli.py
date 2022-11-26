@@ -173,7 +173,7 @@ def translate(
         '-t',
         '--table',
         help=(
-            'Path to translation table file in JSON format.'
+            'Path to translation table file in YAML or JSON format.'
             '\nStructure of table data is [["repl", "ace"], ["als", "othis"]]'
         ),
         metavar='<translation table path>',
