@@ -5,7 +5,7 @@
 
 ```console
 ❯ afasi version
-Fuzz a language by mixing up only few words. version 2022.10.24+parent.a72a019a
+Fuzz a language by mixing up only few words. version 2022.11.28+parent.63423cd2
 ```
 
 ### General Help
