@@ -1,5 +1,9 @@
 # Changelog
 
+## 2022.11.28
+
+* Fixed name of the script deployed by package installs
+
 ## 2022.11.26
 
 * Added translation table processing for YAML (new default)

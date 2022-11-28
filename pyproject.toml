@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "afasi"
-version = "2022.11.26"
+version = "2022.11.28"
 description = "Fuzz a language by mixing up only few words."
 readme = "README.md"
 authors = [{ name = "Stefan Hagen", email = "stefan@hagen.link" }]
@@ -34,7 +34,7 @@ Source-Code = "https://git.sr.ht/~sthagen/afasi"
 Test-Coverage = "https://codes.dilettant.life/coverage/afasi"
 
 [project.scripts]
-kiirastuli = "afasi.cli:app"
+afasi = "afasi.cli:app"
 
 [tool.setuptools.packages.find]
 include = ["afasi"]
