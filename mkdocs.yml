@@ -3,6 +3,8 @@ site_description: Fuzz a language by mixing up only few words.
 
 theme:
   name: 'material'
+  logo: assets/logo.png
+  favicon: images/favicon.ico
   features:
     - navigation.expand
     - toc.integrate
