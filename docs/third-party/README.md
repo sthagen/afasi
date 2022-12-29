@@ -1,8 +1,8 @@
 # Third Party Dependencies
 
 <!--[[[fill sbom_sha256()]]]-->
-The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/afasi/blob/default/sbom.json) with SHA256 checksum ([70dacedf ...](https://git.sr.ht/~sthagen/afasi/blob/default/sbom.json.sha256 "sha256:70dacedfe2108834ddbadd553eb4ec838e383bd99662a42a073494f2bb6396af")).
-<!--[[[end]]] (checksum: 28b99a61d3ce9699932230ef22c1f2df)-->
+The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/afasi/blob/default/sbom.json) with SHA256 checksum ([7b7f9274 ...](https://git.sr.ht/~sthagen/afasi/blob/default/sbom.json.sha256 "sha256:7b7f9274a12834cdfbad07472a6ec9cf4d0bfd9a966f5e6ac85d871053fdb0d0")).
+<!--[[[end]]] (checksum: 674840d2178292370511e9005829751b)-->
 ## Licenses 
 
 JSON files with complete license info of: [direct dependencies](direct-dependency-licenses.json) | [all dependencies](all-dependency-licenses.json)
