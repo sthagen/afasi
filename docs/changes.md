@@ -1,5 +1,9 @@
 # Changelog
 
+## Source
+
+* Migrated from flake8 and isort to ruff, realized pyproject.toml only, and refactored the make file
+
 ## 2022.11.28
 
 * Fixed name of the script deployed by package installs
