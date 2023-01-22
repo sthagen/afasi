@@ -4,7 +4,7 @@ Fuzz a language by mixing up only few words.
 
 [License: MIT](https://git.sr.ht/~sthagen/afasi/tree/default/item/LICENSE)
 
-Third party dependencies are documented in the folder [third-party](third-party/README.md).
+Third party dependencies are documented in the folder [third-party](docs/third-party/README.md).
 
 [![version](https://img.shields.io/pypi/v/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
 [![downloads](https://pepy.tech/badge/afasi/month)](https://pepy.tech/project/afasi)
