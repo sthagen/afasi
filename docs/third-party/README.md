@@ -1,8 +1,8 @@
 # Third Party Dependencies
 
 <!--[[[fill sbom_sha256()]]]-->
-The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/afasi/blob/default/sbom.json) with SHA256 checksum ([7b7f9274 ...](https://git.sr.ht/~sthagen/afasi/blob/default/sbom.json.sha256 "sha256:7b7f9274a12834cdfbad07472a6ec9cf4d0bfd9a966f5e6ac85d871053fdb0d0")).
-<!--[[[end]]] (checksum: 674840d2178292370511e9005829751b)-->
+The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/afasi/blob/default/sbom/cdx.json) with SHA256 checksum ([cfea1da6 ...](https://git.sr.ht/~sthagen/afasi/blob/default/sbom/cdx.json.sha256 "sha256:cfea1da6002ed1e44733fa260c5d9ff4473d4d3695bc9fdd6a390a70cdd30e88")).
+<!--[[[end]]] (checksum: 2a89d1a32c7d497871ca989904bd8c80)-->
 ## Licenses 
 
 JSON files with complete license info of: [direct dependencies](direct-dependency-licenses.json) | [all dependencies](all-dependency-licenses.json)
@@ -40,6 +40,6 @@ Base graphviz file in dot format: [Trees of the direct dependencies](package-dep
 ````console
 PyYAML==6.0
 typer==0.7.0
-  - click [required: >=7.1.1,<9.0.0, installed: 8.1.3]
+└── click [required: >=7.1.1,<9.0.0, installed: 8.1.3]
 ````
-<!--[[[end]]] (checksum: fb8a9deeb3eb15f126bd258693d0e6c0)-->
+<!--[[[end]]] (checksum: ab998e1d339d7d13d4f5b5a4ba18099b)-->
