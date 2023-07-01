@@ -11,6 +11,7 @@ Third party dependencies are documented in the folder [third-party](docs/third-p
 [![wheel](https://img.shields.io/pypi/wheel/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
 [![supported-versions](https://img.shields.io/pypi/pyversions/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
 [![supported-implementations](https://img.shields.io/pypi/implementation/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
+[![maintenance-status](https://img.shields.io/github/commit-activity/y/sthagen/afasi.svg?style=flat)](https://git.sr.ht/~sthagen/afasi/log)
 
 ## Documentation
 
