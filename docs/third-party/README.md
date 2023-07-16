@@ -1,8 +1,8 @@
 # Third Party Dependencies
 
 <!--[[[fill sbom_sha256()]]]-->
-The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/afasi/blob/default/sbom/cdx.json) with SHA256 checksum ([cfea1da6 ...](https://git.sr.ht/~sthagen/afasi/blob/default/sbom/cdx.json.sha256 "sha256:cfea1da6002ed1e44733fa260c5d9ff4473d4d3695bc9fdd6a390a70cdd30e88")).
-<!--[[[end]]] (checksum: 2a89d1a32c7d497871ca989904bd8c80)-->
+The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/afasi/blob/default/sbom/cdx.json) with SHA256 checksum ([d8f9a89c ...](https://git.sr.ht/~sthagen/afasi/blob/default/sbom/cdx.json.sha256 "sha256:d8f9a89cfd106853e3db313751ae015582f96fe896f21fb14c6fe4f5467bfaae")).
+<!--[[[end]]] (checksum: b3bc497876e2e948fd1725317fc294e5)-->
 ## Licenses 
 
 JSON files with complete license info of: [direct dependencies](direct-dependency-licenses.json) | [all dependencies](all-dependency-licenses.json)
@@ -13,16 +13,16 @@ JSON files with complete license info of: [direct dependencies](direct-dependenc
 | Name                                       | Version                                        | License     | Author            | Description (from packaging data)                                  |
 |:-------------------------------------------|:-----------------------------------------------|:------------|:------------------|:-------------------------------------------------------------------|
 | [PyYAML](https://pyyaml.org/)              | [6.0](https://pypi.org/project/PyYAML/6.0/)    | MIT License | Kirill Simonov    | YAML parser and emitter for Python                                 |
-| [typer](https://github.com/tiangolo/typer) | [0.7.0](https://pypi.org/project/typer/0.7.0/) | MIT License | Sebastián Ramírez | Typer, build great CLIs. Easy to code. Based on Python type hints. |
-<!--[[[end]]] (checksum: 7ea1d51e800d9cdc2f6df676ae1f50de)-->
+| [typer](https://github.com/tiangolo/typer) | [0.9.0](https://pypi.org/project/typer/0.9.0/) | MIT License | Sebastián Ramírez | Typer, build great CLIs. Easy to code. Based on Python type hints. |
+<!--[[[end]]] (checksum: 9dad9df639cabfd2f15306f379954cf7)-->
 
 ### Indirect Dependencies
 
 <!--[[[fill indirect_dependencies_table()]]]-->
-| Name                                          | Version                                        | License     | Author         | Description (from packaging data)         |
-|:----------------------------------------------|:-----------------------------------------------|:------------|:---------------|:------------------------------------------|
-| [click](https://palletsprojects.com/p/click/) | [8.1.3](https://pypi.org/project/click/8.1.3/) | BSD License | Armin Ronacher | Composable command line interface toolkit |
-<!--[[[end]]] (checksum: dc3a866a7aa3332404bde3da87727cb9)-->
+| Name                                          | Version                                        | License     | Author  | Description (from packaging data)         |
+|:----------------------------------------------|:-----------------------------------------------|:------------|:--------|:------------------------------------------|
+| [click](https://palletsprojects.com/p/click/) | [8.1.5](https://pypi.org/project/click/8.1.5/) | BSD License | UNKNOWN | Composable command line interface toolkit |
+<!--[[[end]]] (checksum: fc083c8a6d9a7dd9891e6168f79bd76b)-->
 
 ## Dependency Tree(s)
 
@@ -39,7 +39,8 @@ Base graphviz file in dot format: [Trees of the direct dependencies](package-dep
 <!--[[[fill dependency_tree_console_text()]]]-->
 ````console
 PyYAML==6.0
-typer==0.7.0
-└── click [required: >=7.1.1,<9.0.0, installed: 8.1.3]
+typer==0.9.0
+├── click [required: >=7.1.1,<9.0.0, installed: 8.1.5]
+└── typing-extensions [required: >=3.7.4.3, installed: 4.7.1]
 ````
-<!--[[[end]]] (checksum: ab998e1d339d7d13d4f5b5a4ba18099b)-->
+<!--[[[end]]] (checksum: f1ef22c853014426e41f7d2fded43226)-->
