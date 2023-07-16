@@ -1,0 +1,14 @@
+name: afasi
+description: Fuzz a language by mixing up only few words.
+license_spdx: MIT
+version: 2022.11.28
+spec_version: 1.0
+home_url: https://git.sr.ht/~sthagen/afasi
+news_url: https://libraries.io/pypi/afasi/versions.atom
+date: 2022-11-28
+about_resource: ./
+libraries_io_url: https://libraries.io/pypi/afasi?number=2022.11.28
+vcs_tool: git
+vcs_repository: https://git.sr.ht/~sthagen/afasi
+vcs_branch: default
+
