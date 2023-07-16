@@ -7,7 +7,7 @@ import pathlib
 import sys
 import typing
 from json.decoder import JSONDecodeError
-from typing import Iterator
+from typing import Iterator, Union
 
 import yaml
 
@@ -94,7 +94,7 @@ def reader(path: str) -> Iterator[str]:
             yield line
 
 
-def verify_request(argv: list[str] | None) -> tuple[int, str, list[str]]:
+def verify_request(argv: Union[list[str], None]) -> tuple[int, str, list[str]]:
     """Gail with grace."""
     if not argv or len(argv) != 5:
         return 2, 'received wrong number of arguments', ['']
@@ -132,7 +132,7 @@ def speculative_table_loader(path: pathlib.Path):
     return True, (tuple(),)
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: Union[list[str], None] = None) -> int:
     """Drive the translation."""
     error, message, strings = verify_request(argv)
     if error:
