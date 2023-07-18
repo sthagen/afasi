@@ -1,2 +1,2 @@
-PyYAML==6.0
+PyYAML==6.0.1
 typer==0.9.0
