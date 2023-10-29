@@ -5,7 +5,7 @@ Fuzz a language by mixing up only few words.
 [![license](docs/badges/license-spdx-mit.svg)](https://git.sr.ht/~sthagen/afasi/tree/default/item/LICENSE)
 [![Country of Origin](docs/badges/country-of-origin-name-switzerland-neutral.svg)](https://git.sr.ht/~sthagen/afasi/tree/default/item/COUNTRY-OF-ORIGIN)
 [![Export Classification Control Number (ECCN)](docs/badges/export-control-classification-number_eccn-ear99-neutral.svg)](https://git.sr.ht/~sthagen/afasi/tree/default/item/EXPORT-CONTROL-CLASSIFICATION-NUMBER)
-[![Configuration](docs/badges/configuration-sbom.svg)](third-party/README.md)
+[![Configuration](docs/badges/configuration-sbom.svg)](https://git.sr.ht/~sthagen/afasi/tree/default/item/docs/third-party)
 
 [![Version](https://img.shields.io/pypi/v/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
 [![Downloads](https://static.pepy.tech/badge/afasi/month)](https://pepy.tech/project/afasi)
