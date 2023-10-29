@@ -2,18 +2,15 @@
 
 Fuzz a language by mixing up only few words.
 
-[License: MIT](https://git.sr.ht/~sthagen/afasi/tree/default/item/LICENSE) | 
-[Country of origin: Switzerland](https://git.sr.ht/~sthagen/afasi/tree/default/item/COUNTRY-OF-ORIGIN) | 
-[Export control classification number(ECCN): EAR99](https://git.sr.ht/~sthagen/afasi/tree/default/item/EXPORT-CONTROL-CLASSIFICATION-NUMBER)
+[![license](docs/badges/license-spdx-mit.svg)](https://git.sr.ht/~sthagen/afasi/tree/default/item/LICENSE)
+[![Country of Origin](docs/badges/country-of-origin-name-switzerland-neutral.svg)](https://git.sr.ht/~sthagen/afasi/tree/default/item/COUNTRY-OF-ORIGIN)
+[![Export Classification Control Number (ECCN)](docs/badges/export-control-classification-number_eccn-ear99-neutral.svg)](https://git.sr.ht/~sthagen/afasi/tree/default/item/EXPORT-CONTROL-CLASSIFICATION-NUMBER)
+[![Configuration](docs/badges/configuration-sbom.svg)](third-party/README.md)
 
-Third party dependencies are documented in the folder [third-party](docs/third-party/README.md).
-
-[![version](https://img.shields.io/pypi/v/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
-[![downloads](https://static.pepy.tech/badge/afasi/month)](https://pepy.tech/project/afasi)
-[![wheel](https://img.shields.io/pypi/wheel/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
-[![supported-versions](https://img.shields.io/pypi/pyversions/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
-[![supported-implementations](https://img.shields.io/pypi/implementation/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
-[![maintenance-status](https://img.shields.io/github/commit-activity/y/sthagen/afasi.svg?style=flat)](https://git.sr.ht/~sthagen/afasi/log)
+[![Version](https://img.shields.io/pypi/v/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
+[![Downloads](https://static.pepy.tech/badge/afasi/month)](https://pepy.tech/project/afasi)
+[![Supported Versions](https://img.shields.io/pypi/pyversions/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
+[![Maintenance Status](https://img.shields.io/github/commit-activity/y/sthagen/afasi.svg?style=flat)](https://git.sr.ht/~sthagen/afasi/log)
 
 ## Documentation
 
