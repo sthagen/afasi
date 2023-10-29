@@ -76,7 +76,7 @@ clean:
 	@rm -rf .benchmarks .hypothesis .*_cache
 	@rm -f .coverage .coverage.* *.log .DS_Store
 	@echo skipping not yet working pip uninstall $(package)
-	@rm -fr site/*
+	@rm -fr site/* docs/book/*
 
 .PHONY: name
 name:
