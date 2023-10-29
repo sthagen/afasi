@@ -1,0 +1,151 @@
+{
+  "data": [
+    {
+      "category": "3.10",
+      "date": "2023-05",
+      "downloads": 13
+    },
+    {
+      "category": "3.10",
+      "date": "2023-06",
+      "downloads": 25
+    },
+    {
+      "category": "3.10",
+      "date": "2023-07",
+      "downloads": 6
+    },
+    {
+      "category": "3.10",
+      "date": "2023-08",
+      "downloads": 6
+    },
+    {
+      "category": "3.10",
+      "date": "2023-09",
+      "downloads": 2
+    },
+    {
+      "category": "3.10",
+      "date": "2023-10",
+      "downloads": 2
+    },
+    {
+      "category": "3.11",
+      "date": "2023-05",
+      "downloads": 7
+    },
+    {
+      "category": "3.11",
+      "date": "2023-06",
+      "downloads": 18
+    },
+    {
+      "category": "3.11",
+      "date": "2023-07",
+      "downloads": 16
+    },
+    {
+      "category": "3.11",
+      "date": "2023-08",
+      "downloads": 17
+    },
+    {
+      "category": "3.11",
+      "date": "2023-09",
+      "downloads": 6
+    },
+    {
+      "category": "3.11",
+      "date": "2023-10",
+      "downloads": 1
+    },
+    {
+      "category": "3.3",
+      "date": "2023-10",
+      "downloads": 4
+    },
+    {
+      "category": "3.8",
+      "date": "2023-06",
+      "downloads": 2
+    },
+    {
+      "category": "3.8",
+      "date": "2023-07",
+      "downloads": 2
+    },
+    {
+      "category": "3.8",
+      "date": "2023-08",
+      "downloads": 1
+    },
+    {
+      "category": "3.8",
+      "date": "2023-09",
+      "downloads": 1
+    },
+    {
+      "category": "3.8",
+      "date": "2023-10",
+      "downloads": 1
+    },
+    {
+      "category": "3.9",
+      "date": "2023-05",
+      "downloads": 14
+    },
+    {
+      "category": "3.9",
+      "date": "2023-06",
+      "downloads": 36
+    },
+    {
+      "category": "3.9",
+      "date": "2023-07",
+      "downloads": 5
+    },
+    {
+      "category": "3.9",
+      "date": "2023-08",
+      "downloads": 7
+    },
+    {
+      "category": "3.9",
+      "date": "2023-09",
+      "downloads": 3
+    },
+    {
+      "category": "null",
+      "date": "2023-05",
+      "downloads": 79
+    },
+    {
+      "category": "null",
+      "date": "2023-06",
+      "downloads": 67
+    },
+    {
+      "category": "null",
+      "date": "2023-07",
+      "downloads": 71
+    },
+    {
+      "category": "null",
+      "date": "2023-08",
+      "downloads": 61
+    },
+    {
+      "category": "null",
+      "date": "2023-09",
+      "downloads": 33
+    },
+    {
+      "category": "null",
+      "date": "2023-10",
+      "downloads": 53
+    }
+  ],
+  "package": "afasi",
+  "type": "python_minor_downloads"
+}
