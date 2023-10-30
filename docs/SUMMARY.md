@@ -1,6 +1,6 @@
 # Summary
 
-[Afasi](./index.md)
+[About](./index.md)
 - [Install](./install.md)
 - [Usage](./usage.md)
 - [API](./api.md)
