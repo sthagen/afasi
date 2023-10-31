@@ -9,7 +9,7 @@ Fuzz a language by mixing up only few words.
 
 [![Version](docs/badges/latest-release.svg)](https://pypi.python.org/pypi/afasi/)
 [![Downloads](docs/badges/downloads-per-month.svg)](https://pepy.tech/project/afasi)
-[![Supported Versions](https://img.shields.io/pypi/pyversions/afasi.svg?style=flat)](https://pypi.python.org/pypi/afasi/)
+[![Python](docs/badges/python-versions.svg)](https://pypi.python.org/pypi/afasi/)
 [![Maintenance Status](docs/badges/commits-per-year.svg)](https://git.sr.ht/~sthagen/afasi/log)
 
 ## Documentation
