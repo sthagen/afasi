@@ -1,7 +1,7 @@
 {
   "afasi": {
-    "version": "7.3.2",
-    "timestamp": "2023-12-02T15:12:46.789764",
+    "coverage_tool_version": "7.3.2",
+    "timestamp": "2023-12-02 15:48:50 +00:00",
     "branch_coverage": true,
     "show_contexts": true,
     "covered_lines": 247,
@@ -13,6 +13,23 @@
     "num_branches": 117,
     "num_partial_branches": 2,
     "covered_branches": 113,
-    "missing_branches": 4
+    "missing_branches": 4,
+    "node_id": "c79891e5-aabf-3a83-95b9-588edcd8327f",
+    "nfiles": 4,
+    "files": [
+      "afasi/__init__.py",
+      "afasi/afasi.py",
+      "afasi/cli.py",
+      "afasi/tabel.py"
+    ],
+    "blake3": "c78662fe532585d7e7f13022e11ee798b5fb24a010886eab843d69a180937d20",
+    "blake2": "f016930f6b5b290159f7d6f61c8a128e920805b33faa19946e18499b298be3fc69e5b85080cf240cda90553c7e4f4d9b851925dd8712baf48c05c0a4e8cd8b22",
+    "sha512": "b1ede3a2ff1885bab1ce2fb28007010b3d00bc0965ba655443f63d5a0f65c272adc5b30fca7fe626e593f9a4d18f5843a03a05caca54ce927534ff85d9c1075f",
+    "sha384": "5e0591834021b516ab25dfd37581bbed991b7f0f01f693e5ca4031923cedcbb9779c236660d23bf8e748594896c19b5a",
+    "sha256": "83ae846d6c7a4a70394008d0aa4e4e261d3f5fdc39cec27c9e6ba22273a89617",
+    "sha1": "e95223a51ecaf4b0c95a348c51b14b9de16c0b1b",
+    "md5": "ea1414b60252d590bb5c1122c0940efb",
+    "python_version": "3.10.12",
+    "entropy": 4.784772
   }
 }
