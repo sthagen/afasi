@@ -22,9 +22,8 @@ The main source of `afasi` is on a mountain in central Switzerland.
 We use distributed version control (git).
 There is no central hub.
 Every clone can become a new source for the benefit of all.
-The preferred public clones of `afasi` are:
+The preferred public clone of `afasi` is:
 
-* [on codeberg](https://codeberg.org/sthagen/afasi) - a democratic community-driven, non-profit software development platform operated by Codeberg e.V.
 * [at sourcehut](https://git.sr.ht/~sthagen/afasi) - a collection of tools useful for software development.
 
 ## Contributions
