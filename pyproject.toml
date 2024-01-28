@@ -7,6 +7,7 @@ name = "afasi"
 version = "2022.11.28"
 description = "Fuzz a language by mixing up only few words."
 readme = "README.md"
+license = {file = "LICENSE"}
 authors = [{ name = "Stefan Hagen", email = "stefan@hagen.link" }]
 maintainers = [{ name = "Stefan Hagen", email = "stefan@hagen.link" }]
 classifiers = [
