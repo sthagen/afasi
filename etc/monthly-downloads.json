@@ -33,7 +33,7 @@
     {
       "category": "3.10",
       "date": "2024-02",
-      "downloads": 4
+      "downloads": 8
     },
     {
       "category": "3.11",
@@ -68,7 +68,7 @@
     {
       "category": "3.11",
       "date": "2024-02",
-      "downloads": 4
+      "downloads": 8
     },
     {
       "category": "3.12",
@@ -83,7 +83,7 @@
     {
       "category": "3.12",
       "date": "2024-02",
-      "downloads": 4
+      "downloads": 8
     },
     {
       "category": "3.3",
@@ -173,7 +173,7 @@
     {
       "category": "null",
       "date": "2024-02",
-      "downloads": 2
+      "downloads": 9
     }
   ],
   "package": "afasi",
