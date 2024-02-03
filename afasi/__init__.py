@@ -1,4 +1,5 @@
 """Fuzz a language by mixing up only few words."""
+
 import datetime as dti
 import logging
 import os
