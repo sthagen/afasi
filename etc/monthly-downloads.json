@@ -3,7 +3,7 @@
     {
       "category": "3.10",
       "date": "2024-10",
-      "downloads": 76
+      "downloads": 68
     },
     {
       "category": "3.10",
@@ -33,12 +33,12 @@
     {
       "category": "3.10",
       "date": "2025-04",
-      "downloads": 162
+      "downloads": 170
     },
     {
       "category": "3.11",
       "date": "2024-10",
-      "downloads": 84
+      "downloads": 76
     },
     {
       "category": "3.11",
@@ -68,12 +68,12 @@
     {
       "category": "3.11",
       "date": "2025-04",
-      "downloads": 162
+      "downloads": 170
     },
     {
       "category": "3.12",
       "date": "2024-10",
-      "downloads": 74
+      "downloads": 66
     },
     {
       "category": "3.12",
@@ -103,7 +103,7 @@
     {
       "category": "3.12",
       "date": "2025-04",
-      "downloads": 160
+      "downloads": 168
     },
     {
       "category": "3.13",
@@ -143,7 +143,7 @@
     {
       "category": "null",
       "date": "2024-10",
-      "downloads": 1347
+      "downloads": 1236
     },
     {
       "category": "null",
@@ -173,7 +173,7 @@
     {
       "category": "null",
       "date": "2025-04",
-      "downloads": 226
+      "downloads": 239
     }
   ],
   "package": "afasi",
