@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=expression-not-assigned,line-too-long
 """Fuzz a language by mixing up only few words. API."""
+
 import difflib
 import json
 import pathlib

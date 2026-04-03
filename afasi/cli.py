@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=line-too-long
 """Commandline API gateway for afasi."""
+
 import sys
 
 import typer
